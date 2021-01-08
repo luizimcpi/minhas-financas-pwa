@@ -25,29 +25,29 @@ function SimpleMenu() {
         setAnchorEl(event.currentTarget);
     };
 
-  const handleClose = () => {
-    setAnchorEl(null);
-  };
+    const handleClose = () => {
+        setAnchorEl(null);
+    };
 
-  return (
-    <div>
-      <IconButton edge="start" className={classes.menuButton} color="inherit" aria-label="menu">
-        <MenuIcon onClick={handleClick}/>
-      </IconButton>
-      <Menu
-        id="simple-menu"
-        anchorEl={anchorEl}
-        keepMounted
-        open={Boolean(anchorEl)}
-        onClose={handleClose}
-      >
-        <MenuItem onClick={handleClose}>Home</MenuItem>
-        <MenuItem onClick={handleClose}>Usuários</MenuItem>
-        <MenuItem onClick={handleClose}>Lançamentos</MenuItem>
-        <MenuItem onClick={handleClose}>Sair</MenuItem>
-      </Menu>
-    </div>
-  );
+    return (
+        <div>
+        <IconButton edge="start" className={classes.menuButton} color="inherit" aria-label="menu">
+            <MenuIcon onClick={handleClick}/>
+        </IconButton>
+        <Menu
+            id="simple-menu"
+            anchorEl={anchorEl}
+            keepMounted
+            open={Boolean(anchorEl)}
+            onClose={handleClose}
+        >
+            <MenuItem onClick={handleClose}>Home</MenuItem>
+            <MenuItem onClick={handleClose} href="#/cadastro-usuarios">Usuários</MenuItem>
+            <MenuItem onClick={handleClose}>Lançamentos</MenuItem>
+            <MenuItem onClick={handleClose}>Sair</MenuItem>
+        </Menu>
+        </div>
+    );
 }
 
 export default SimpleMenu

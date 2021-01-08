@@ -53,6 +53,10 @@ add following import in App.js
 import 'fontsource-roboto';
 ```
 
+### `yarn add react-router-dom`
+
+This package control routes in react app
+
 ## Learn More
 
 You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
