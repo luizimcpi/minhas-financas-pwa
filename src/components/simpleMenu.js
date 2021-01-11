@@ -1,7 +1,5 @@
 import Button from '@material-ui/core/Button';
-import IconButton from '@material-ui/core/IconButton';
 import Menu from '@material-ui/core/Menu';
-import MenuIcon from '@material-ui/icons/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
@@ -32,9 +30,9 @@ function SimpleMenu() {
 
     return (
       <React.Fragment>
-        <IconButton edge="start" className={classes.menuButton} color="inherit" aria-label="menu">
-            <MenuIcon onClick={handleClick}/>
-        </IconButton>
+        <Button aria-controls="simple-menu" aria-haspopup="true" variant="contained" onClick={handleClick}>
+          Menu
+        </Button>
         <Menu
             id="simple-menu"
             anchorEl={anchorEl}
@@ -42,14 +40,11 @@ function SimpleMenu() {
             open={Boolean(anchorEl)}
             onClose={handleClose}
         >
-            <MenuItem onClick={handleClose}>Home</MenuItem>
-            <MenuItem onClick={handleClose} href="#/cadastro-usuarios">Usuários</MenuItem>
-            <MenuItem onClick={handleClose}>Lançamentos</MenuItem>
-            <MenuItem onClick={handleClose}>Sair</MenuItem>
-          {/* <Button color="inherit" href="#/cadastro-usuarios">Usuários</Button>
-          <Button color="inherit" href="#/cadastro-usuarios">Lançamentos</Button>
-          <Button color="inherit" href="#/login">Login</Button>
-          <Button color="inherit" href="#/cadastro-usuarios">Sair</Button> */}
+          <MenuItem onClick={event => window.location.href='#/login'}>Home</MenuItem>
+          <MenuItem onClick={event => window.location.href='#/login'} href="#/login">Login</MenuItem>
+          <MenuItem onClick={event => window.location.href='#/cadastro-usuarios'}>Usuários</MenuItem>
+          <MenuItem onClick={handleClose}>Lançamentos</MenuItem>
+          <MenuItem onClick={handleClose}>Sair</MenuItem>
         </Menu>
       </React.Fragment>
     );

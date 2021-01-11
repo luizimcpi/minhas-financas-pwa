@@ -21,29 +21,31 @@ const useStyles = makeStyles((theme) => ({
     width: '40ch',
   },
 }));
-
-export default function LoginForm({entrar}) {
-
-  const classes = useStyles();
-  const [email, setEmail] = useState("")
-  const [senha, setSenha] = useState("")
   
+
+export default function UsuarioForm() {
+  const classes = useStyles();
 
   return (
     <div className={classes.root}>
-     <form onSubmit={
-                (event) => {
-                    event.preventDefault();
-                    entrar({email, senha});
-                }
-            }>
       <Grid container spacing={3}>
         <Grid item xs={12}>
         <Paper className={classes.paper}>
         <Typography variant="h3" gutterBottom>
-          Login
+          Cadastro de Usuário
         </Typography>
         </Paper>
+          <Paper className={classes.paper}>
+            <FormControl className={classes.formControlTextField}>
+                <TextField id="outlined-full-width" label="Nome" fullWidth
+                    margin="normal"
+                    InputLabelProps={{
+                        shrink: true,
+                    }}
+                    variant="outlined" 
+                />
+              </FormControl>
+          </Paper>
           <Paper className={classes.paper}>
             <FormControl className={classes.formControlTextField}>
                 <TextField id="outlined-full-width" label="Email" fullWidth
@@ -51,13 +53,7 @@ export default function LoginForm({entrar}) {
                     InputLabelProps={{
                         shrink: true,
                     }}
-                    variant="outlined"
-                    value={email}
-                    onChange={
-                        event => {
-                            setEmail(event.target.value);
-                        }
-                    }
+                    variant="outlined" 
                 />
               </FormControl>
           </Paper>
@@ -74,23 +70,35 @@ export default function LoginForm({entrar}) {
                         shrink: true,
                     }}
                     variant="outlined"
-                    value={senha}
-                    onChange={
-                        event => {
-                            setSenha(event.target.value);
-                        }
-                    }
                 />
             </FormControl>
           </Paper>
           <Paper className={classes.paper}>
-            <Button type="submit" variant="contained" color="primary">
-              Entrar
+            <FormControl className={classes.formControlTextField}>
+                <TextField
+                    id="outlined-password-input"
+                    label="Confirmação de Senha"
+                    type="password"
+                    autoComplete="current-password"
+                    fullWidth
+                    margin="normal"
+                    InputLabelProps={{
+                        shrink: true,
+                    }}
+                    variant="outlined"
+                />
+            </FormControl>
+          </Paper>
+          <Paper className={classes.paper}>
+            <Button variant="contained" color="primary">
+              Cadastrar
+            </Button>
+            <Button variant="contained" color="secondary">
+              Cancelar
             </Button>
           </Paper>
         </Grid>
       </Grid>
-      </form>
     </div>
   );
 }

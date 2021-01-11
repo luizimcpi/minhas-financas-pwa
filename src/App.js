@@ -2,7 +2,6 @@ import 'fontsource-roboto';
 import './App.css';
 
 import AppBar from '@material-ui/core/AppBar';
-import Button from '@material-ui/core/Button';
 import React from 'react';
 import Rotas from './rotas'
 import SimpleMenu from './components/simpleMenu'
@@ -30,12 +29,10 @@ function App() {
     <React.Fragment>
       <AppBar position="static">
         <Toolbar>
-          {/* <SimpleMenu /> */}
           <Typography variant="h6" className={classes.title}>
             $ Minhas Finanças
           </Typography>
-          {/* <Button color="inherit" href="#/login">Login</Button> */}
-           <SimpleMenu />
+          <SimpleMenu />
         </Toolbar>
       </AppBar>
       <Rotas />
