@@ -1,3 +1,4 @@
+import Button from '@material-ui/core/Button';
 import IconButton from '@material-ui/core/IconButton';
 import Menu from '@material-ui/core/Menu';
 import MenuIcon from '@material-ui/icons/Menu';
@@ -30,7 +31,7 @@ function SimpleMenu() {
     };
 
     return (
-        <div>
+      <React.Fragment>
         <IconButton edge="start" className={classes.menuButton} color="inherit" aria-label="menu">
             <MenuIcon onClick={handleClick}/>
         </IconButton>
@@ -45,8 +46,12 @@ function SimpleMenu() {
             <MenuItem onClick={handleClose} href="#/cadastro-usuarios">Usuários</MenuItem>
             <MenuItem onClick={handleClose}>Lançamentos</MenuItem>
             <MenuItem onClick={handleClose}>Sair</MenuItem>
+          {/* <Button color="inherit" href="#/cadastro-usuarios">Usuários</Button>
+          <Button color="inherit" href="#/cadastro-usuarios">Lançamentos</Button>
+          <Button color="inherit" href="#/login">Login</Button>
+          <Button color="inherit" href="#/cadastro-usuarios">Sair</Button> */}
         </Menu>
-        </div>
+      </React.Fragment>
     );
 }
 

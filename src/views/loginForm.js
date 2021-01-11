@@ -1,36 +1,31 @@
 import Button from '@material-ui/core/Button';
-import Card from '@material-ui/core/Card';
-import CardActions from '@material-ui/core/CardActions';
-import CardContent from '@material-ui/core/CardContent';
 import { FormControl } from '@material-ui/core';
+import Grid from '@material-ui/core/Grid';
+import Paper from '@material-ui/core/Paper';
 import React from 'react';
 import TextField from '@material-ui/core/TextField';
 import { makeStyles } from '@material-ui/core/styles';
 
-const useStyles = makeStyles({
-    root: {
-      minWidth: 275,
-    },
-    bullet: {
-      display: 'inline-block',
-      margin: '0 2px',
-      transform: 'scale(0.8)',
-    },
-    title: {
-      fontSize: 14,
-    },
-    pos: {
-      marginBottom: 12,
-    },
-  });
+const useStyles = makeStyles((theme) => ({
+  root: {
+    flexGrow: 1,
+  },
+  paper: {
+    padding: theme.spacing(1),
+    textAlign: 'center',
+    color: theme.palette.text.secondary,
+  },
+}));
   
 
 export default function LoginForm() {
   const classes = useStyles();
 
   return (
-    <Card className={classes.root}>
-        <CardContent>
+    <div className={classes.root}>
+      <Grid container spacing={3}>
+        <Grid item xs={12}>
+          <Paper className={classes.paper}>
             <FormControl>
                 <TextField id="outlined-full-width" label="Email" fullWidth
                     margin="normal"
@@ -39,7 +34,9 @@ export default function LoginForm() {
                     }}
                     variant="outlined" 
                 />
-            </FormControl>
+              </FormControl>
+          </Paper>
+          <Paper className={classes.paper}>
             <FormControl>
                 <TextField
                     id="outlined-password-input"
@@ -54,10 +51,14 @@ export default function LoginForm() {
                     variant="outlined"
                 />
             </FormControl>
-        </CardContent>
-        <CardActions>
-            <Button size="small">Learn More</Button>
-        </CardActions>
-    </Card>
+          </Paper>
+          <Paper className={classes.paper}>
+            <Button variant="contained" color="primary">
+              Entrar
+            </Button>
+          </Paper>
+        </Grid>
+      </Grid>
+    </div>
   );
 }

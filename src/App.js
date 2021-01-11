@@ -30,12 +30,12 @@ function App() {
     <React.Fragment>
       <AppBar position="static">
         <Toolbar>
-          <SimpleMenu />
+          {/* <SimpleMenu /> */}
           <Typography variant="h6" className={classes.title}>
             $ Minhas Finanças
           </Typography>
-          <Button color="inherit" href="#/cadastro-usuarios">Usuários</Button>
-          <Button color="inherit" href="#/login">Login</Button>
+          {/* <Button color="inherit" href="#/login">Login</Button> */}
+           <SimpleMenu />
         </Toolbar>
       </AppBar>
       <Rotas />
