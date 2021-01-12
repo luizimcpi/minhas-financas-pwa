@@ -1,5 +1,4 @@
 import { AuthContext } from '../provedorAutenticacao'
-import AuthService from '../app/service/authService'
 import LoginForm from './loginForm';
 import React from 'react';
 import UsuarioService from '../app/service/usuarioService'
@@ -12,33 +11,27 @@ class Login extends React.Component {
         this.service = new UsuarioService();
     }
 
+    aoEntrarForm = (dados) => { 
+        this.service.autenticar({
+            email: dados.email,
+            senha: dados.senha
+        }).then( response => {
+            this.context.iniciarSessao(response.data) 
+            this.props.history.push('/cadastro-usuarios')
+        }).catch( erro => {
+            console.log('erro ao efetuar login..,')
+        })
+    }
+
     render(){
         return(
-            <LoginForm entrar={aoEntrarForm}/>
+            <LoginForm entrar={this.aoEntrarForm}/>
         )
     }
 
 }
 
-function aoEntrarForm(dados){
-    const service = new UsuarioService()
-    
-    
-    service.autenticar({
-        email: dados.email,
-        senha: dados.senha
-    }).then( response => {
-        console.log('response ' + response.data)
-        // context.iniciarSessao(response.data)
-        // this.context.iniciarSessao(response.data)
-        // AuthService.logar(response.data)
-        // this.props.history.push('/cadastro-usuarios')
-        console.log('sucesso ')
-    }).catch( erro => {
-        console.log('erro ' + erro)
-        console.log('erro ao efetuar login..,')
-    })
-}
+
 
 Login.contextType = AuthContext
 

@@ -2,6 +2,7 @@ import 'fontsource-roboto';
 import './App.css';
 
 import AppBar from '@material-ui/core/AppBar';
+import ProvedorAutenticacao from './provedorAutenticacao'
 import React from 'react';
 import Rotas from './rotas'
 import SimpleMenu from './components/simpleMenu'
@@ -27,15 +28,17 @@ function App() {
   
   return (
     <React.Fragment>
-      <AppBar position="static">
-        <Toolbar>
-          <Typography variant="h6" className={classes.title}>
-            $ Minhas Finanças
-          </Typography>
-          <SimpleMenu />
-        </Toolbar>
-      </AppBar>
-      <Rotas />
+      <ProvedorAutenticacao>
+        <AppBar position="static">
+          <Toolbar>
+            <Typography variant="h6" className={classes.title}>
+              $ Minhas Finanças
+            </Typography>
+            <SimpleMenu />
+          </Toolbar>
+        </AppBar>
+        <Rotas />
+      </ProvedorAutenticacao>
     </React.Fragment>
   );
 }
