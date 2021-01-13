@@ -1,9 +1,10 @@
+import { AuthConsumer } from '../provedorAutenticacao'
 import Button from '@material-ui/core/Button';
 import Menu from '@material-ui/core/Menu';
-import MenuItem from '@material-ui/core/MenuItem';
+import MenuItemCustom from './menuItem';
 import React from 'react';
 
-function SimpleMenu() {
+function SimpleMenu(props) {
     const [anchorEl, setAnchorEl] = React.useState(null);
 
     const handleClick = (event) => {
@@ -25,15 +26,20 @@ function SimpleMenu() {
             keepMounted
             open={Boolean(anchorEl)}
             onClose={handleClose}
-        >
-          <MenuItem onClick={event => window.location.href='#/login'}>Home</MenuItem>
-          <MenuItem onClick={event => window.location.href='#/login'} href="#/login">Login</MenuItem>
-          <MenuItem onClick={event => window.location.href='#/cadastro-usuarios'}>Usuários</MenuItem>
-          <MenuItem onClick={handleClose}>Lançamentos</MenuItem>
-          <MenuItem onClick={handleClose}>Sair</MenuItem>
+        > 
+          <MenuItemCustom render={props.isUsuarioAutenticado} onClick={event => window.location.href='#/home'} label="Home" />
+          <MenuItemCustom render={props.isUsuarioAutenticado} onClick={event => window.location.href='#/cadastro-usuarios'} label="Usuários" />
+          {/* <MenuItemCustom render={props.isUsuarioAutenticado} href="#/consulta-lancamentos" label="Lançamentos" /> */}
+          <MenuItemCustom render={props.isUsuarioAutenticado} onClick={props.deslogar} label="Sair" />
         </Menu>
       </div>
     );
 }
 
-export default SimpleMenu
+export default () => (
+  <AuthConsumer>
+      {(context) => (
+          <SimpleMenu isUsuarioAutenticado={context.isAutenticado} deslogar={context.encerrarSessao}/>
+      )}
+  </AuthConsumer>
+);

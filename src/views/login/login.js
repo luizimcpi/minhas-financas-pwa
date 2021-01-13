@@ -17,7 +17,7 @@ class Login extends React.Component {
             senha: dados.senha
         }).then( response => {
             this.context.iniciarSessao(response.data) 
-            this.props.history.push('/cadastro-usuarios')
+            this.props.history.push('/home')
         }).catch( erro => {
             console.log('erro ', erro)
         })
