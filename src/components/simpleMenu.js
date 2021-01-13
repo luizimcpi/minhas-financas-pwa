@@ -15,7 +15,7 @@ function SimpleMenu() {
     };
 
     return (
-      <React.Fragment>
+      <div>
         <Button aria-controls="simple-menu" aria-haspopup="true" variant="contained" onClick={handleClick}>
           Menu
         </Button>
@@ -32,7 +32,7 @@ function SimpleMenu() {
           <MenuItem onClick={handleClose}>Lançamentos</MenuItem>
           <MenuItem onClick={handleClose}>Sair</MenuItem>
         </Menu>
-      </React.Fragment>
+      </div>
     );
 }
 

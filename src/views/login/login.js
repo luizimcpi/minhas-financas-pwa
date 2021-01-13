@@ -1,7 +1,7 @@
-import { AuthContext } from '../provedorAutenticacao'
+import { AuthContext } from '../../provedorAutenticacao'
 import LoginForm from './loginForm';
 import React from 'react';
-import UsuarioService from '../app/service/usuarioService'
+import UsuarioService from '../../app/service/usuarioService'
 import { withRouter } from 'react-router-dom'
 
 class Login extends React.Component {
@@ -19,7 +19,7 @@ class Login extends React.Component {
             this.context.iniciarSessao(response.data) 
             this.props.history.push('/cadastro-usuarios')
         }).catch( erro => {
-            console.log('erro ao efetuar login..,')
+            console.log('erro ', erro)
         })
     }
 

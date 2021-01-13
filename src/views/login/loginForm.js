@@ -1,6 +1,7 @@
 import { React, useState } from 'react';
 
 import Button from '@material-ui/core/Button';
+import CircularProgress from '@material-ui/core/CircularProgress';
 import { FormControl } from '@material-ui/core';
 import Grid from '@material-ui/core/Grid';
 import Paper from '@material-ui/core/Paper';
@@ -19,6 +20,9 @@ const useStyles = makeStyles((theme) => ({
   },
   formControlTextField: {
     width: '40ch',
+  },
+  progress: {
+    display: "none",
   },
 }));
 
@@ -39,11 +43,16 @@ export default function LoginForm({entrar}) {
             }>
       <Grid container spacing={3}>
         <Grid item xs={12}>
-        <Paper className={classes.paper}>
-        <Typography variant="h3" gutterBottom>
-          Login
-        </Typography>
-        </Paper>
+          <Paper className={classes.paper}>
+            <div className={classes.progress}>
+              <CircularProgress />
+            </div>
+          </Paper>
+          <Paper className={classes.paper}>
+            <Typography variant="h3" gutterBottom>
+              Login
+            </Typography>
+          </Paper>
           <Paper className={classes.paper}>
             <FormControl className={classes.formControlTextField}>
                 <TextField id="outlined-full-width" label="Email" fullWidth
