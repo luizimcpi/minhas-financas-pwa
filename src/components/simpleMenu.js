@@ -3,7 +3,7 @@ import Button from '@material-ui/core/Button';
 import Menu from '@material-ui/core/Menu';
 import React from 'react';
 
-function SimpleMenu(props) {
+function SimpleMenuBar(props) {
     const [anchorEl, setAnchorEl] = React.useState(null);
 
     const handleClick = (event) => {
@@ -53,10 +53,12 @@ function SimpleMenu(props) {
    
 }
 
-export default () => (
+const SimpleMenu = () => (
   <AuthConsumer>
       {(context) => (
-          <SimpleMenu isUsuarioAutenticado={context.isAutenticado} deslogar={context.encerrarSessao}/>
+          <SimpleMenuBar isUsuarioAutenticado={context.isAutenticado} deslogar={context.encerrarSessao}/>
       )}
   </AuthConsumer>
 );
+
+export default SimpleMenu;

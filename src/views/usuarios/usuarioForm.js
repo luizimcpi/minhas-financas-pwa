@@ -93,7 +93,7 @@ export default function UsuarioForm() {
             <Button variant="contained" color="primary">
               Cadastrar
             </Button>
-            <Button variant="contained" color="secondary">
+            <Button variant="contained" color="secondary" href="#/home">
               Cancelar
             </Button>
           </Paper>
