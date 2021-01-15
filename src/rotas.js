@@ -25,6 +25,7 @@ function Rotas(props){
     return (
         <HashRouter>
             <Switch>
+                <Route path='/' exact={true} component={Login} />
                 <Route path="/login" component={Login} />
                 <Route path="/cadastro-usuarios" component={CadastroUsuario} />
                 <RotaAutenticada isUsuarioAutenticado={props.isUsuarioAutenticado} path="/home" component={Home} />
