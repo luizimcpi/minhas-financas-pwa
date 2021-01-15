@@ -1,8 +1,9 @@
+import { React, useState } from 'react';
+
 import Button from '@material-ui/core/Button';
 import { FormControl } from '@material-ui/core';
 import Grid from '@material-ui/core/Grid';
 import Paper from '@material-ui/core/Paper';
-import { React } from 'react';
 import TextField from '@material-ui/core/TextField';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
@@ -22,12 +23,21 @@ const useStyles = makeStyles((theme) => ({
 }));
   
 
-export default function UsuarioForm() {
+export default function UsuarioForm({cadastrar}) {
   const classes = useStyles();
+  const [nome, setNome] = useState("")
+  const [email, setEmail] = useState("")
+  const [senha, setSenha] = useState("")
+  const [senhaRepeticao, setSenhaRepeticao] = useState("")
 
   return (
     <div className={classes.root}>
-     <form>
+     <form onSubmit={
+                (event) => {
+                    event.preventDefault();
+                    cadastrar({nome, email, senha, senhaRepeticao});
+                }
+            }>
       <Grid container spacing={3}>
         <Grid item xs={12}>
         <Paper className={classes.paper}>
@@ -42,7 +52,13 @@ export default function UsuarioForm() {
                     InputLabelProps={{
                         shrink: true,
                     }}
-                    variant="outlined" 
+                    variant="outlined"
+                    value={nome}
+                    onChange={
+                        event => {
+                            setNome(event.target.value);
+                        }
+                    }
                 />
               </FormControl>
           </Paper>
@@ -54,6 +70,12 @@ export default function UsuarioForm() {
                         shrink: true,
                     }}
                     variant="outlined" 
+                    value={email}
+                    onChange={
+                        event => {
+                            setEmail(event.target.value);
+                        }
+                    }
                 />
               </FormControl>
           </Paper>
@@ -70,6 +92,12 @@ export default function UsuarioForm() {
                         shrink: true,
                     }}
                     variant="outlined"
+                    value={senha}
+                    onChange={
+                        event => {
+                            setSenha(event.target.value);
+                        }
+                    }
                 />
             </FormControl>
           </Paper>
@@ -86,11 +114,17 @@ export default function UsuarioForm() {
                         shrink: true,
                     }}
                     variant="outlined"
+                    value={senhaRepeticao}
+                    onChange={
+                        event => {
+                            setSenhaRepeticao(event.target.value);
+                        }
+                    }
                 />
             </FormControl>
           </Paper>
           <Paper className={classes.paper}>
-            <Button variant="contained" color="primary">
+            <Button type="submit" variant="contained" color="primary">
               Cadastrar
             </Button>
             <Button variant="contained" color="secondary" href="#/home">
