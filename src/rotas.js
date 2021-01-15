@@ -2,7 +2,7 @@ import { HashRouter, Redirect, Route, Switch } from 'react-router-dom'
 
 import { AuthConsumer } from './provedorAutenticacao'
 import CadastroUsuario from './views/usuarios/cadastroUsuario'
-import Home from './views/home'
+import Home from './views/home/home'
 import Login from './views/login/login'
 import React from 'react'
 
