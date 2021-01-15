@@ -19,7 +19,7 @@ const useStyles = makeStyles((theme) => ({
     color: theme.palette.text.secondary,
   },
   formControlTextField: {
-    width: '40ch',
+    width: '30ch',
   },
   progress: {
     display: "none",
