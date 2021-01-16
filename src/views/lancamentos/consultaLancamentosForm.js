@@ -24,7 +24,7 @@ const useStyles = makeStyles((theme) => ({
 }));
   
 
-export default function ConsultaLancamentoForm({meses, tipos, buscar}) {
+export default function ConsultaLancamentoForm({meses, tipos, buscar, cadastrar}) {
   const classes = useStyles();
   const [ano, setAno] = useState("")
   const [mes, setMes] = useState("")
@@ -132,8 +132,8 @@ export default function ConsultaLancamentoForm({meses, tipos, buscar}) {
             <Button type="submit" variant="contained" color="primary">
               Buscar
             </Button>
-            <Button variant="contained" color="secondary" href="#/cadastro-lancamentos">
-              Cadastrar
+            <Button variant="contained" color="secondary" onClick={cadastrar}>
+                Cadastrar
             </Button>
           </Paper>
         </Grid>

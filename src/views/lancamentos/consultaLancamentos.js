@@ -4,6 +4,7 @@ import React from 'react'
 import { withRouter } from 'react-router-dom'
 import ConsultaLancamentosForm from './consultaLancamentosForm'
 
+
 class ConsultaLancamentos extends React.Component{
 
     state = {
@@ -46,7 +47,7 @@ class ConsultaLancamentos extends React.Component{
         })
     }
 
-    cadastrar = () => {
+    aoCadastrarForm = () => {
         this.props.history.push('/cadastro-lancamentos')
     }
 
@@ -103,7 +104,9 @@ class ConsultaLancamentos extends React.Component{
         const tipos = this.service.obterListaTipos()        
 
         return (
-            <ConsultaLancamentosForm meses={meses} tipos={tipos} buscar={this.aoBuscarForm} />   
+            <React.Fragment>
+                <ConsultaLancamentosForm meses={meses} tipos={tipos} buscar={this.aoBuscarForm} cadastrar={this.aoCadastrarForm} />   
+            </React.Fragment>
         )
     }
 }
