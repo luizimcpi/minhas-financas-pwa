@@ -96,6 +96,7 @@ export default function LoginForm({entrar}) {
             <Button type="submit" variant="contained" color="primary">
               Entrar
             </Button>
+            <Button variant="outlined" color="secondary" href="#/cadastro-usuarios">Usuários</Button>
           </Paper>
         </Grid>
       </Grid>
