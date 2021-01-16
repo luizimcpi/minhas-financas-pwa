@@ -7,10 +7,6 @@ import ConsultaLancamentosForm from './consultaLancamentosForm'
 class ConsultaLancamentos extends React.Component{
 
     state = {
-        ano: '',
-        mes: '',
-        tipo: '',
-        descricao: '',
         showConfirmDialog: false,
         lancamentoDeletar: {},
         lancamentos: []
@@ -43,7 +39,7 @@ class ConsultaLancamentos extends React.Component{
             if(lista.length < 1){
                 alert('Nenhum resultado encontrado.')
             }
-            console.log('lista :>>>> ', lista)
+        
             this.setState({ lancamentos: lista })
         }).catch( error => {
             alert('Erro ao consultar lançamentos. Tente novamente ou mais tarde.')
