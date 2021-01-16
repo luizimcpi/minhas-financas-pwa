@@ -6,7 +6,8 @@ import UsuarioService from '../../app/service/usuarioService'
 class Home extends React.Component {
 
     state = {
-        saldo: 0
+        saldo: 0,
+        usuario: ''
     }
 
     constructor(){
@@ -19,9 +20,9 @@ class Home extends React.Component {
         
         this.usuarioService.obterSaldoPorUsuario(usuarioLogado)
         .then( response => {
-            console.log('saldo na home.js >>>> ' + response.data)
-            this.setState({saldo: response.data})
+            this.setState({saldo: response.data, usuario: usuarioLogado.nome})
         }).catch( error => {
+            alert('Erro ao obter saldo do usuário.')
             console.error(error.response);
         });
     }

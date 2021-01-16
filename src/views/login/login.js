@@ -19,6 +19,7 @@ class Login extends React.Component {
             this.context.iniciarSessao(response.data) 
             this.props.history.push('/home')
         }).catch( erro => {
+            alert('Nome de usuário / senha inválido(s), tente novamente ou mais tarde...')
             console.log('erro ', erro)
         })
     }

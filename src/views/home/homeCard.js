@@ -28,6 +28,7 @@ const useStyles = makeStyles({
 export default function HomeCard({data}) {
   const classes = useStyles();  
   const saldoAtual = data.saldo
+  const nomeUsuario = data.usuario
  
   return (
     <Grid container spacing={3}>
@@ -35,7 +36,7 @@ export default function HomeCard({data}) {
             <Card className={classes.root}>
                 <CardContent>
                     <Typography className={classes.title} color="textSecondary" gutterBottom>
-                    Minhas Finanças
+                    Olá, {nomeUsuario}
                     </Typography>
                     <Typography variant="h5" component="h2">
                         Seu saldo para o mês atual é de: 
