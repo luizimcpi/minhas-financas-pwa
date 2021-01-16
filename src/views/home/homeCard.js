@@ -52,7 +52,7 @@ export default function HomeCard({data}) {
                 </CardContent>
                 <CardActions>
                     <Button variant="outlined" color="secondary" href="#/cadastro-usuarios" size="small">Usuários</Button>
-                    <Button variant="contained" color="primary" href="#/cadastro-lancamentos" size="small">Lançamentos</Button>
+                    <Button variant="contained" color="primary" href="#/consulta-lancamentos" size="small">Lançamentos</Button>
                 </CardActions>
             </Card>
         </Grid>
