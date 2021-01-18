@@ -1,9 +1,9 @@
 import { AuthContext } from '../../provedorAutenticacao'
+import ConsultaLancamentosForm from './consultaLancamentosForm'
 import LancamentoService from '../../app/service/lancamentoService'
+import LancamentosTable from './consultaLancamentosTable'
 import React from 'react'
 import { withRouter } from 'react-router-dom'
-import ConsultaLancamentosForm from './consultaLancamentosForm'
-
 
 class ConsultaLancamentos extends React.Component{
 
@@ -12,7 +12,7 @@ class ConsultaLancamentos extends React.Component{
         lancamentoDeletar: {},
         lancamentos: []
     }
-
+    
     constructor(){
         super();
         this.service = new LancamentoService();
@@ -40,7 +40,6 @@ class ConsultaLancamentos extends React.Component{
             if(lista.length < 1){
                 alert('Nenhum resultado encontrado.')
             }
-        
             this.setState({ lancamentos: lista })
         }).catch( error => {
             alert('Erro ao consultar lançamentos. Tente novamente ou mais tarde.')
@@ -106,6 +105,7 @@ class ConsultaLancamentos extends React.Component{
         return (
             <React.Fragment>
                 <ConsultaLancamentosForm meses={meses} tipos={tipos} buscar={this.aoBuscarForm} cadastrar={this.aoCadastrarForm} />   
+                <LancamentosTable lancamentos={this.state.lancamentos}/>
             </React.Fragment>
         )
     }
