@@ -1,8 +1,8 @@
 import { AuthConsumer } from '../provedorAutenticacao'
 import Button from '@material-ui/core/Button';
 import Menu from '@material-ui/core/Menu';
-import React from 'react';
 import MenuItemCustom from './menuItemCustom'
+import React from 'react';
 
 function SimpleMenuBar(props) {
     const [anchorEl, setAnchorEl] = React.useState(null);
@@ -30,7 +30,7 @@ function SimpleMenuBar(props) {
           <MenuItemCustom render={!props.isUsuarioAutenticado} onClick={event => window.location.href='#/login'} label="Login" />
           <MenuItemCustom render={props.isUsuarioAutenticado} onClick={event => window.location.href='#/home'} label="Home" />
           <MenuItemCustom render={props.isUsuarioAutenticado} onClick={event => window.location.href='#/cadastro-usuarios'} label="Usuários" />
-          <MenuItemCustom render={props.isUsuarioAutenticado} href="#/consulta-lancamentos" label="Lançamentos" />
+          <MenuItemCustom render={props.isUsuarioAutenticado} onClick={event => window.location.href='#/consulta-lancamentos'} label="Lançamentos" />
           <MenuItemCustom render={props.isUsuarioAutenticado} onClick={props.deslogar} label="Sair" />
         </Menu>
       </React.Fragment>
