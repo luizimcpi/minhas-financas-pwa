@@ -54,7 +54,7 @@ class ConsultaLancamentos extends React.Component{
         this.props.history.push(`/cadastro-lancamentos/${id}`)
     }
 
-    alterarStatus = (lancamento, status) => {
+    aoAlterarStatus = (lancamento, status) => {
         const usuarioLogado = this.context.usuarioAutenticado
         
         this.service
@@ -105,7 +105,7 @@ class ConsultaLancamentos extends React.Component{
         return (
             <React.Fragment>
                 <ConsultaLancamentosForm meses={meses} tipos={tipos} buscar={this.aoBuscarForm} cadastrar={this.aoCadastrarForm} />   
-                <LancamentosTable lancamentos={this.state.lancamentos}/>
+                <LancamentosTable lancamentos={this.state.lancamentos} alterarStatus={this.aoAlterarStatus}/>
             </React.Fragment>
         )
     }

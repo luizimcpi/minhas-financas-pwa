@@ -1,4 +1,8 @@
-import AcoesLancamentosMenu from './acoesLancamentosMenu'
+import CheckCircleIcon from '@material-ui/icons/CheckCircle';
+import ClearIcon from '@material-ui/icons/Clear';
+import DeleteIcon from '@material-ui/icons/Delete';
+import EditIcon from '@material-ui/icons/Create';
+import IconButton from '@material-ui/core/IconButton';
 import Paper from '@material-ui/core/Paper';
 import React from 'react';
 import Table from '@material-ui/core/Table';
@@ -42,7 +46,29 @@ export default function LancamentosTable({lancamentos}) {
               <TableCell align="right">{row.tipo}</TableCell>
               <TableCell align="right">{row.mes}</TableCell>
               <TableCell align="right">{row.status}</TableCell>
-              <TableCell align="right"><AcoesLancamentosMenu /></TableCell>
+             
+              <TableCell align="right"> 
+                <label htmlFor="icon-button-file">
+                  <IconButton color="primary" size="small" aria-label="efetivar" component="span" disabled={row.status !== 'PENDENTE'}>
+                    <CheckCircleIcon />
+                  </IconButton>
+                </label>
+                <label htmlFor="icon-button-file">
+                  <IconButton color="secondary" size="small" aria-label="cancelar" component="span" disabled={row.status !== 'PENDENTE'}>
+                    <ClearIcon />
+                  </IconButton>
+                </label>
+                <label htmlFor="icon-button-file">
+                  <IconButton color="default" size="small" aria-label="editar" component="span">
+                    <EditIcon />
+                  </IconButton>
+                </label>
+                <label htmlFor="icon-button-file">
+                  <IconButton color="secondary" size="small" aria-label="excluir" component="span">
+                    <DeleteIcon />
+                  </IconButton>
+                </label>
+              </TableCell>
             </TableRow>
           ))}
         </TableBody>
