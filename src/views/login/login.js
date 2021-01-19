@@ -24,9 +24,13 @@ class Login extends React.Component {
         })
     }
 
+    toUsuarios = () => {
+        this.props.history.push('/cadastro-usuarios')
+    }
+
     render(){
         return(
-            <LoginForm entrar={this.aoEntrarForm}/>
+            <LoginForm entrar={this.aoEntrarForm} usuarios={this.toUsuarios}/>
         )
     }
 

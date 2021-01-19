@@ -26,7 +26,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function LoginForm({entrar}) {
+export default function LoginForm({entrar, usuarios}) {
 
   const classes = useStyles();
   const [email, setEmail] = useState("")
@@ -96,7 +96,7 @@ export default function LoginForm({entrar}) {
             <Button type="submit" variant="contained" color="primary">
               Entrar
             </Button>
-            <Button variant="outlined" color="secondary" href="#/cadastro-usuarios">Usuários</Button>
+            <Button variant="outlined" color="secondary" onClick={usuarios}>Usuários</Button>
           </Paper>
         </Grid>
       </Grid>
