@@ -6,12 +6,14 @@ import React from 'react'
 import { withRouter } from 'react-router-dom'
 import AlertDialogSlide from './alertDialogSlide'
 import AlertDialogInformation from '../../components/alertDialogInformation'
+import AlertLoading from '../../components/alertLoading'
 
 class ConsultaLancamentos extends React.Component{
 
     state = {
         mensagemAlerta: '',
         showInfoDialog: false,
+        showLoadingDialog: false,
         showConfirmDialog: false,
         lancamentoDeletar: {},
         lancamentos: []
@@ -42,16 +44,18 @@ class ConsultaLancamentos extends React.Component{
             descricao: dados.descricao
         }
 
+        this.setState({showLoadingDialog: true})
+
         this.service
         .consultar(lancamentoFiltro, usuarioLogado)
         .then( response => {
             const lista = response.data
             if(lista.length < 1){
-                this.setState({showInfoDialog: true, mensagemAlerta: 'Nenhum resultado encontrado!'})
+                this.setState({showLoadingDialog: false, showInfoDialog: true, mensagemAlerta: 'Nenhum resultado encontrado!'})
             }
-            this.setState({ lancamentos: lista })
+            this.setState({showLoadingDialog: false, lancamentos: lista })
         }).catch( error => {
-            this.setState({showInfoDialog: true, mensagemAlerta: 'Erro ao consultar lançamentos. Tente novamente ou mais tarde.'})
+            this.setState({showLoadingDialog: false, showInfoDialog: true, mensagemAlerta: 'Erro ao consultar lançamentos. Tente novamente ou mais tarde.'})
         })
     }
 
@@ -65,7 +69,8 @@ class ConsultaLancamentos extends React.Component{
 
     aoAlterarStatus = (lancamento, status) => {
         const usuarioLogado = this.context.usuarioAutenticado
-        
+        this.setState({showLoadingDialog: true})
+
         this.service
         .alterarStatus(lancamento.id, status, usuarioLogado)
         .then(response => {
@@ -77,9 +82,9 @@ class ConsultaLancamentos extends React.Component{
                 lancamentos[index] = lancamento
                 this.setState( { lancamentos })
             }
-            this.setState({showInfoDialog: true, mensagemAlerta: 'Status atualizado com sucesso!'})
+            this.setState({showLoadingDialog: false, showInfoDialog: true, mensagemAlerta: 'Status atualizado com sucesso!'})
         }).catch(error => {
-            this.setState({showInfoDialog: true, mensagemAlerta: 'Erro ao tentar alterar status do lançamento.'})
+            this.setState({showLoadingDialog: false, showInfoDialog: true, mensagemAlerta: 'Erro ao tentar alterar status do lançamento.'})
         })
     }
 
@@ -94,15 +99,17 @@ class ConsultaLancamentos extends React.Component{
     deletar = () => {
         const usuarioLogado = this.context.usuarioAutenticado
         
+        this.setState({showLoadingDialog: true})
+
         this.service.deletar(this.state.lancamentoDeletar.id, usuarioLogado)
         .then(response => {
             const lancamentos = this.state.lancamentos
             const index = lancamentos.indexOf(this.state.lancamentoDeletar)
             lancamentos.splice(index, 1);
             this.setState({lancamentos: lancamentos, showConfirmDialog: false})
-            this.setState({showInfoDialog: true, mensagemAlerta: 'Lançamento excluído com sucesso!'})
+            this.setState({showLoadingDialog: false, showInfoDialog: true, mensagemAlerta: 'Lançamento excluído com sucesso!'})
         }).catch( error => {
-            this.setState({showInfoDialog: true, mensagemAlerta: 'Ocorreu um erro ao tentar excluir o lançamento.'})
+            this.setState({showLoadingDialog: false, showInfoDialog: true, mensagemAlerta: 'Ocorreu um erro ao tentar excluir o lançamento.'})
         })
     }
 
@@ -130,6 +137,8 @@ class ConsultaLancamentos extends React.Component{
                     close={this.fecharAlertaAviso} 
                     mensagemCustomizada={this.state.mensagemAlerta} 
                 />             
+
+                <AlertLoading open={this.state.showLoadingDialog} />
             </React.Fragment>
         )
     }

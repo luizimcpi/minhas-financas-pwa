@@ -20,7 +20,19 @@ class Login extends React.Component {
     }
 
     aoEntrarForm = (dados) => { 
+       
+        if(!dados.email){
+            this.setState({showInfoDialog: true, mensagemAlerta: 'Favor preencher o campo Email...'})
+            return false
+        }
+
+        if(!dados.senha){
+            this.setState({showInfoDialog: true, mensagemAlerta: 'Favor preencher o campo Senha...'})
+            return false
+        }
+
         this.setState({showLoadingDialog: true})
+
         this.service.autenticar({
             email: dados.email,
             senha: dados.senha
