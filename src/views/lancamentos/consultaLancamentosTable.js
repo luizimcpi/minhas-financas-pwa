@@ -13,7 +13,7 @@ import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import currencyFormatter from 'currency-formatter'
 
-export default props => {
+const LancamentosTable = (props) => {
   
   const rows = props.lancamentos.map( lancamento => {
     return (
@@ -28,23 +28,25 @@ export default props => {
     
       <TableCell align="right"> 
         <label htmlFor="icon-button-file">
-          <IconButton color="primary" 
-          size="small" 
-          aria-label="efetivar" 
-          component="span" 
-          disabled={lancamento.status !== 'PENDENTE'}
-          onClick={ e => props.alterarStatus(lancamento, 'EFETIVADO')}
+          <IconButton 
+            color="primary" 
+            size="small" 
+            aria-label="efetivar" 
+            component="span" 
+            disabled={lancamento.status !== 'PENDENTE'}
+            onClick={ e => props.alterarStatus(lancamento, 'EFETIVADO')}
           >
             <CheckCircleIcon />
           </IconButton>
         </label>
         <label htmlFor="icon-button-file">
-          <IconButton color="secondary" 
-          size="small" 
-          aria-label="cancelar" 
-          component="span" 
-          disabled={lancamento.status !== 'PENDENTE'}
-          onClick={ e => props.alterarStatus(lancamento, 'CANCELADO')}
+          <IconButton 
+            color="secondary" 
+            size="small" 
+            aria-label="cancelar" 
+            component="span" 
+            disabled={lancamento.status !== 'PENDENTE'}
+            onClick={ e => props.alterarStatus(lancamento, 'CANCELADO')}
           >
             <ClearIcon />
           </IconButton>
@@ -55,7 +57,13 @@ export default props => {
           </IconButton>
         </label>
         <label htmlFor="icon-button-file">
-          <IconButton color="secondary" size="small" aria-label="excluir" component="span">
+          <IconButton 
+            color="secondary" 
+            size="small" 
+            aria-label="excluir" 
+            component="span"
+            onClick={e => props.deletarAction(lancamento)}
+          >
             <DeleteIcon />
           </IconButton>
         </label>
@@ -84,3 +92,5 @@ export default props => {
     </TableContainer>
   )
 }
+
+export default LancamentosTable;

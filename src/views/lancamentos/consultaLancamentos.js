@@ -4,10 +4,14 @@ import LancamentoService from '../../app/service/lancamentoService'
 import LancamentosTable from './consultaLancamentosTable'
 import React from 'react'
 import { withRouter } from 'react-router-dom'
+import AlertDialogSlide from './alertDialogSlide'
+import AlertDialogInformation from './alertDialogInformation'
 
 class ConsultaLancamentos extends React.Component{
 
     state = {
+        mensagemAlerta: '',
+        showInfoDialog: false,
         showConfirmDialog: false,
         lancamentoDeletar: {},
         lancamentos: []
@@ -18,9 +22,14 @@ class ConsultaLancamentos extends React.Component{
         this.service = new LancamentoService();
     }
 
+    fecharAlertaAviso = () => {
+        this.setState({showInfoDialog: false, mensagemAlerta: ''})
+    }
+
     aoBuscarForm = (dados) => {
+       
         if(!dados.ano){
-            alert('O preenchimento do campo Ano é obrigatório.')
+            this.setState({showInfoDialog: true, mensagemAlerta: 'O preenchimento do campo Ano é obrigatório.'})
             return false
         }
         
@@ -38,11 +47,11 @@ class ConsultaLancamentos extends React.Component{
         .then( response => {
             const lista = response.data
             if(lista.length < 1){
-                alert('Nenhum resultado encontrado.')
+                this.setState({showInfoDialog: true, mensagemAlerta: 'Nenhum resultado encontrado!'})
             }
             this.setState({ lancamentos: lista })
         }).catch( error => {
-            alert('Erro ao consultar lançamentos. Tente novamente ou mais tarde.')
+            this.setState({showInfoDialog: true, mensagemAlerta: 'Erro ao consultar lançamentos. Tente novamente ou mais tarde.'})
         })
     }
 
@@ -68,9 +77,9 @@ class ConsultaLancamentos extends React.Component{
                 lancamentos[index] = lancamento
                 this.setState( { lancamentos })
             }
-            alert('Status atualizado com sucesso!')
+            this.setState({showInfoDialog: true, mensagemAlerta: 'Status atualizado com sucesso!'})
         }).catch(error => {
-            alert('Erro ao tentar alterar status do lançamento.')
+            this.setState({showInfoDialog: true, mensagemAlerta: 'Erro ao tentar alterar status do lançamento.'})
         })
     }
 
@@ -91,16 +100,16 @@ class ConsultaLancamentos extends React.Component{
             const index = lancamentos.indexOf(this.state.lancamentoDeletar)
             lancamentos.splice(index, 1);
             this.setState({lancamentos: lancamentos, showConfirmDialog: false})
-            alert('Lançamento deletado com sucesso!')
+            this.setState({showInfoDialog: true, mensagemAlerta: 'Lançamento excluído com sucesso!'})
         }).catch( error => {
-            alert('Ocorreu um erro ao tentar deletar o lançamento.')
+            this.setState({showInfoDialog: true, mensagemAlerta: 'Ocorreu um erro ao tentar excluir o lançamento.'})
         })
     }
 
     render(){
 
         const meses = this.service.obterListaMeses()
-        const tipos = this.service.obterListaTipos()        
+        const tipos = this.service.obterListaTipos()    
 
         return (
             <React.Fragment>
@@ -108,7 +117,19 @@ class ConsultaLancamentos extends React.Component{
                 <LancamentosTable 
                     lancamentos={this.state.lancamentos} 
                     alterarStatus={this.aoAlterarStatus}
-                />
+                    deletarAction={this.abrirConfirmacao}
+                /> 
+                <AlertDialogSlide 
+                    open={this.state.showConfirmDialog} 
+                    lancamentoInfo={this.state.lancamentoDeletar}
+                    deletarAction={this.deletar} 
+                    cancelarAction={this.cancelarDelecao} />   
+
+                <AlertDialogInformation 
+                    open={this.state.showInfoDialog} 
+                    close={this.fecharAlertaAviso} 
+                    mensagemCustomizada={this.state.mensagemAlerta} 
+                />             
             </React.Fragment>
         )
     }
