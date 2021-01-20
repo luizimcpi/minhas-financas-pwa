@@ -5,7 +5,7 @@ import LancamentosTable from './consultaLancamentosTable'
 import React from 'react'
 import { withRouter } from 'react-router-dom'
 import AlertDialogSlide from './alertDialogSlide'
-import AlertDialogInformation from './alertDialogInformation'
+import AlertDialogInformation from '../../components/alertDialogInformation'
 
 class ConsultaLancamentos extends React.Component{
 
