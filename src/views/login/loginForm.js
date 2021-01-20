@@ -22,9 +22,6 @@ const useStyles = makeStyles((theme) => ({
   formControlTextField: {
     width: '30ch',
   },
-  progress: {
-    display: "none",
-  },
   cardAction: {
     justifyContent: "center",
   },
