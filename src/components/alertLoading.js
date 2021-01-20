@@ -1,9 +1,9 @@
-import React from 'react';
+import CircularProgress from '@material-ui/core/CircularProgress';
 import Dialog from '@material-ui/core/Dialog';
 import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
+import React from 'react';
 import Slide from '@material-ui/core/Slide';
-import CircularProgress from '@material-ui/core/CircularProgress';
 
 const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
@@ -12,7 +12,7 @@ const Transition = React.forwardRef(function Transition(props, ref) {
 export default function AlertLoading(props) {
 
   return (
-    <div>
+    <React.Fragment>
       <Dialog
         open={props.open}
         TransitionComponent={Transition}
@@ -26,6 +26,6 @@ export default function AlertLoading(props) {
           </DialogContentText>
         </DialogContent>
       </Dialog>
-    </div>
+    </React.Fragment>
   );
 }

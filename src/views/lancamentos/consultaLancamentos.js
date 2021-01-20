@@ -1,12 +1,12 @@
+import AlertDialogInformation from '../../components/alertDialogInformation'
+import AlertDialogSlide from './alertDialogSlide'
+import AlertLoading from '../../components/alertLoading'
 import { AuthContext } from '../../provedorAutenticacao'
 import ConsultaLancamentosForm from './consultaLancamentosForm'
 import LancamentoService from '../../app/service/lancamentoService'
 import LancamentosTable from './consultaLancamentosTable'
 import React from 'react'
 import { withRouter } from 'react-router-dom'
-import AlertDialogSlide from './alertDialogSlide'
-import AlertDialogInformation from '../../components/alertDialogInformation'
-import AlertLoading from '../../components/alertLoading'
 
 class ConsultaLancamentos extends React.Component{
 
@@ -106,8 +106,7 @@ class ConsultaLancamentos extends React.Component{
             const lancamentos = this.state.lancamentos
             const index = lancamentos.indexOf(this.state.lancamentoDeletar)
             lancamentos.splice(index, 1);
-            this.setState({lancamentos: lancamentos, showConfirmDialog: false})
-            this.setState({showLoadingDialog: false, showInfoDialog: true, mensagemAlerta: 'Lançamento excluído com sucesso!'})
+            this.setState({lancamentos: lancamentos, showConfirmDialog: false, showLoadingDialog: false, showInfoDialog: true, mensagemAlerta: 'Lançamento excluído com sucesso!'})
         }).catch( error => {
             this.setState({showLoadingDialog: false, showInfoDialog: true, mensagemAlerta: 'Ocorreu um erro ao tentar excluir o lançamento.'})
         })
