@@ -4,10 +4,12 @@ import React from 'react';
 import UsuarioService from '../../app/service/usuarioService'
 import { withRouter } from 'react-router-dom'
 import AlertDialogInformation from '../../components/alertDialogInformation'
+import AlertLoading from '../../components/alertLoading'
 
 class Login extends React.Component {
 
     state = {
+        showLoadingDialog: false,
         mensagemAlerta: '',
         showInfoDialog: false
     }
@@ -18,14 +20,16 @@ class Login extends React.Component {
     }
 
     aoEntrarForm = (dados) => { 
+        this.setState({showLoadingDialog: true})
         this.service.autenticar({
             email: dados.email,
             senha: dados.senha
         }).then( response => {
+            this.setState({showLoadingDialog: false})
             this.context.iniciarSessao(response.data) 
             this.props.history.push('/home')
         }).catch( erro => {
-            this.setState({showInfoDialog: true, mensagemAlerta: 'Nome de usuário / senha inválido(s), tente novamente ou mais tarde...'})
+            this.setState({showLoadingDialog: false, showInfoDialog: true, mensagemAlerta: 'Nome de usuário / senha inválido(s), tente novamente ou mais tarde...'})
         })
     }
 
@@ -46,6 +50,7 @@ class Login extends React.Component {
                     close={this.fecharAlertaAviso} 
                     mensagemCustomizada={this.state.mensagemAlerta} 
                 />     
+                <AlertLoading open={this.state.showLoadingDialog} />
             </React.Fragment>
         )
     }
