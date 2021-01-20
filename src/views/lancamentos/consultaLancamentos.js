@@ -119,11 +119,12 @@ class ConsultaLancamentos extends React.Component{
 
         return (
             <React.Fragment>
-                <ConsultaLancamentosForm meses={meses} tipos={tipos} buscar={this.aoBuscarForm} cadastrar={this.aoCadastrarForm} />   
+                <ConsultaLancamentosForm meses={meses} tipos={tipos} buscar={this.aoBuscarForm} cadastrar={this.aoCadastrarForm}/>   
                 <LancamentosTable 
                     lancamentos={this.state.lancamentos} 
                     alterarStatus={this.aoAlterarStatus}
                     deletarAction={this.abrirConfirmacao}
+                    editarAction={this.editar}
                 /> 
                 <AlertDialogSlide 
                     open={this.state.showConfirmDialog} 
