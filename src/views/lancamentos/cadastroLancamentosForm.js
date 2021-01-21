@@ -1,4 +1,4 @@
-import { React, useState } from 'react';
+import { React, useEffect, useState } from 'react';
 
 import Button from '@material-ui/core/Button';
 import Card from '@material-ui/core/Card';
@@ -31,29 +31,41 @@ const useStyles = makeStyles((theme) => ({
     justifyContent: "center",
   },
 }));
+
+
   
-
-export default function CadastroLancamentosForm(props) {
-  console.log('atualizando ', props.lancamentoAtualizar.id)
-
+const CadastroLancamentosForm = (props) => {
+  
   const classes = useStyles();
+
+  const [id, setId] = useState("")
   const [descricao, setDescricao] = useState("")
   const [valor, setValor] = useState("")
   const [mes, setMes] = useState("")
   const [ano, setAno] = useState("")
   const [tipo, setTipo] = useState("")
   const [status, setStatus] = useState("")
+  const [atualizando, setAtualizando] = useState("")
 
-  // const descricaoAtualizar = props.lancamentoAtualizar.descricaoAtualizar
-  // const valorAtualizar = props.lancamentoAtualizar.valor
-  // const mesAtualizar = props.lancamentoAtualizar.mes
-  // const anoAtualizar = props.lancamentoAtualizar.ano
-  // const tipoAtualizar = props.lancamentoAtualizar.tipo
-
-  const idAtualizar = props.lancamentoAtualizar.id
-  const statusAtualizar = props.lancamentoAtualizar.status
-  const atualizando = props.lancamentoAtualizar.atualizando
-
+  useEffect(() => {
+    setId(props.lancamentoAtualizar.id)
+    setDescricao(props.lancamentoAtualizar.descricao)
+    setValor(props.lancamentoAtualizar.valor)
+    setMes(props.lancamentoAtualizar.mes)
+    setAno(props.lancamentoAtualizar.ano)
+    setTipo(props.lancamentoAtualizar.tipo)
+    setStatus(props.lancamentoAtualizar.status)
+    setAtualizando(props.lancamentoAtualizar.atualizando)
+  }, [
+        props.lancamentoAtualizar.id,
+        props.lancamentoAtualizar.descricao, 
+        props.lancamentoAtualizar.valor, 
+        props.lancamentoAtualizar.mes, 
+        props.lancamentoAtualizar.ano, 
+        props.lancamentoAtualizar.tipo,
+        props.lancamentoAtualizar.status,
+        props.lancamentoAtualizar.atualizando
+      ]);
 
   const optionsMeses = props.meses.map((option, index) =>
     <option key={index} value={option.value}>{option.label}</option>
@@ -63,14 +75,15 @@ export default function CadastroLancamentosForm(props) {
     <option key={index} value={option.value}>{option.label}</option>
   );
 
-  
+
+
   return (
     <div className={classes.root}>
      <form onSubmit={
                 (event) => {
                     event.preventDefault();
                     if(atualizando){
-                      props.atualizar({descricao, valor, mes, ano, tipo, status: statusAtualizar, id: idAtualizar})
+                      props.atualizar({descricao, valor, mes, ano, tipo, status, id})
                     } else {
                       props.cadastrar({descricao, valor, mes, ano, tipo});
                     }
@@ -92,10 +105,11 @@ export default function CadastroLancamentosForm(props) {
                                 shrink: true,
                             }}
                             variant="outlined" 
+                            name="descricao"
                             value={descricao}
                             onChange={
-                                event => {
-                                    setDescricao(event.target.value);
+                              event => {
+                                  setDescricao(event.target.value)
                                 }
                             }
                         />
@@ -106,22 +120,24 @@ export default function CadastroLancamentosForm(props) {
                           InputLabelProps={{
                               shrink: true,
                           }}
+                          name="valor"
                           variant="outlined" 
                           value={valor}
                           onChange={
                               event => {
-                                  setValor(event.target.value);
-                              }
-                          }
+                                  setValor(event.target.value)
+                                }
+                            }
                       />
                     </FormControl><br/>
                     <FormControl variant="outlined" className={classes.formControlTextField}>
                         <Select
                             native
                             value={mes}
+                            name="mes"
                             onChange={
-                                event => {
-                                    setMes(event.target.value);
+                              event => {
+                                  setMes(event.target.value)
                                 }
                             }
                             label="Mês"
@@ -140,12 +156,13 @@ export default function CadastroLancamentosForm(props) {
                               shrink: true,
                           }}
                           variant="outlined" 
+                          name="ano"
                           value={ano}
                           onChange={
                               event => {
-                                  setAno(event.target.value);
-                              }
-                          }
+                                  setAno(event.target.value)
+                                }
+                            }
                       />
                     </FormControl><br/>
                     <FormControl variant="outlined" className={classes.formControlTextField}>
@@ -153,11 +170,12 @@ export default function CadastroLancamentosForm(props) {
                             native
                             value={tipo}
                             onChange={
-                                event => {
-                                    setTipo(event.target.value);
+                              event => {
+                                  setTipo(event.target.value)
                                 }
                             }
                             label="Tipo"
+                            name="tipo"
                             inputProps={{
                                 name: 'tipo',
                                 id: 'outlined-tipo-native-simple',
@@ -172,8 +190,9 @@ export default function CadastroLancamentosForm(props) {
                           InputLabelProps={{
                               shrink: true,
                           }}
+                          name="status"
                           variant="outlined" 
-                          value={atualizando ? statusAtualizar : status}
+                          value={status}
                           disabled
                       />
                     </FormControl><br/>
@@ -193,3 +212,5 @@ export default function CadastroLancamentosForm(props) {
     </div>
   );
 }
+
+export default CadastroLancamentosForm;
