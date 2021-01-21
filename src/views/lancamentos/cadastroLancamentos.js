@@ -50,31 +50,29 @@ class CadastroLancamentos extends React.Component {
     
     submit = (dados) => {
         const usuarioLogado = this.context.usuarioAutenticado
-        
-        console.log('dadoss aqui no submit ', dados)
 
         const { descricao, valor, mes, ano, tipo} = dados
 
         const lancamento = { descricao, valor, mes, ano, tipo }
 
-        // try {
-        //     this.lancamentoService.validar(lancamento)
-        // }catch(erro){
-        //     const mensagens = erro.mensagens
-        //     mensagens.forEach(msg => this.setState({showInfoDialog: true, mensagemAlerta: msg}))
-        //     return false
-        // }
+        try {
+            this.lancamentoService.validar(lancamento)
+        }catch(erro){
+            const mensagens = erro.mensagens
+            mensagens.forEach(msg => this.setState({showInfoDialog: true, mensagemAlerta: msg}))
+            return false
+        }
 
-        // this.setState({showLoadingDialog: true})
+        this.setState({showLoadingDialog: true})
 
-        // this.lancamentoService
-        // .salvar(lancamento, usuarioLogado)
-        // .then( response => {
-        //     this.props.history.push('/consulta-lancamentos')
-        //     this.setState({showLoadingDialog: false, showInfoDialog: true, mensagemAlerta: 'Lançamento cadastrado com sucesso!'})
-        // }).catch(error => {
-        //     this.setState({showLoadingDialog: false, showInfoDialog: true, mensagemAlerta: error.response.data})
-        // })
+        this.lancamentoService
+        .salvar(lancamento, usuarioLogado)
+        .then( response => {
+            this.props.history.push('/consulta-lancamentos')
+            this.setState({showLoadingDialog: false, showInfoDialog: true, mensagemAlerta: 'Lançamento cadastrado com sucesso!'})
+        }).catch(error => {
+            this.setState({showLoadingDialog: false, showInfoDialog: true, mensagemAlerta: error.response.data})
+        })
     } 
 
     atualizar = (dados) => {
@@ -123,6 +121,7 @@ class CadastroLancamentos extends React.Component {
                     cancelar={this.cancelar} 
                     cadastrar={this.submit} 
                     atualizar={this.atualizar} 
+                    lancamentoAtualizar={lancamentoAtualizar}
                     />
                 <AlertDialogInformation 
                         open={this.state.showInfoDialog} 

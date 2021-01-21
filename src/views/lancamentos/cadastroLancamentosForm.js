@@ -33,16 +33,10 @@ const useStyles = makeStyles((theme) => ({
 }));
   
 
-export default function CadastroLancamentosForm({
-  meses, 
-  tipos, 
-  cancelar, 
-  cadastrar, 
-  atualizar, 
-  // lancamentoAtualizar,
-}) {
+export default function CadastroLancamentosForm(props) {
+  console.log('atualizando ', props.lancamentoAtualizar.id)
+
   const classes = useStyles();
-  const [id, setId] = useState("")
   const [descricao, setDescricao] = useState("")
   const [valor, setValor] = useState("")
   const [mes, setMes] = useState("")
@@ -50,19 +44,22 @@ export default function CadastroLancamentosForm({
   const [tipo, setTipo] = useState("")
   const [status, setStatus] = useState("")
 
-  // setId(lancamentoAtualizar.id)
-  // setDescricao(lancamentoAtualizar.descricao)
-  // setValor(lancamentoAtualizar.valor)
-  // setMes(lancamentoAtualizar.mes)
-  // setAno(lancamentoAtualizar.ano)
-  // setTipo(lancamentoAtualizar.tipo)
-  // setStatus(lancamentoAtualizar.status)
+  // const descricaoAtualizar = props.lancamentoAtualizar.descricaoAtualizar
+  // const valorAtualizar = props.lancamentoAtualizar.valor
+  // const mesAtualizar = props.lancamentoAtualizar.mes
+  // const anoAtualizar = props.lancamentoAtualizar.ano
+  // const tipoAtualizar = props.lancamentoAtualizar.tipo
 
-  const optionsMeses = meses.map((option, index) =>
+  const idAtualizar = props.lancamentoAtualizar.id
+  const statusAtualizar = props.lancamentoAtualizar.status
+  const atualizando = props.lancamentoAtualizar.atualizando
+
+
+  const optionsMeses = props.meses.map((option, index) =>
     <option key={index} value={option.value}>{option.label}</option>
   );
 
-  const optionsTipos = tipos.map((option, index) =>
+  const optionsTipos = props.tipos.map((option, index) =>
     <option key={index} value={option.value}>{option.label}</option>
   );
 
@@ -72,10 +69,10 @@ export default function CadastroLancamentosForm({
      <form onSubmit={
                 (event) => {
                     event.preventDefault();
-                    if(false){
-                      atualizar({descricao, valor, mes, ano, tipo, status, id})
+                    if(atualizando){
+                      props.atualizar({descricao, valor, mes, ano, tipo, status: statusAtualizar, id: idAtualizar})
                     } else {
-                      cadastrar({descricao, valor, mes, ano, tipo});
+                      props.cadastrar({descricao, valor, mes, ano, tipo});
                     }
 
                 }
@@ -86,7 +83,7 @@ export default function CadastroLancamentosForm({
             <Card className={classes.root}>
                 <CardContent className={classes.cardContent}>
                     <Typography variant="h3" gutterBottom>
-                      {false ? 'Atualização de Lançamento' : 'Cadastro de Lançamentos'}
+                      {atualizando ? 'Atualização de Lançamento' : 'Cadastro de Lançamentos'}
                     </Typography>
                     <FormControl className={classes.formControlTextField}>
                         <TextField id="outlined-full-width-descricao" label="Descrição" fullWidth
@@ -176,16 +173,16 @@ export default function CadastroLancamentosForm({
                               shrink: true,
                           }}
                           variant="outlined" 
-                          value={status}
+                          value={atualizando ? statusAtualizar : status}
                           disabled
                       />
                     </FormControl><br/>
                 </CardContent>
                 <CardActions className={classes.cardAction}>
                   <Button type="submit" variant="contained" color="primary">
-                    Cadastrar
+                   {atualizando ? 'Atualizar' : 'Cadastrar'}
                   </Button>
-                  <Button variant="contained" color="secondary" onClick={cancelar}>
+                  <Button variant="contained" color="secondary" onClick={props.cancelar}>
                     Cancelar
                   </Button>
                 </CardActions>
