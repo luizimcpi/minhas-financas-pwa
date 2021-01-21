@@ -52,7 +52,13 @@ const LancamentosTable = (props) => {
           </IconButton>
         </label>
         <label htmlFor="icon-button-file">
-          <IconButton color="default" size="small" aria-label="editar" component="span">
+          <IconButton 
+              color="default" 
+              size="small" 
+              aria-label="editar" 
+              component="span"
+              onClick={e => props.editarAction(lancamento.id)}
+              >
             <EditIcon />
           </IconButton>
         </label>
