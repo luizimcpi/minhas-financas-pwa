@@ -24,11 +24,15 @@ class UsuarioService extends ApiService {
         if(!usuario.nome){
             erros.push('O campo nome é obrigatório.')
         }
-
+        const emailPattern = /^\w+@[a-zA-Z_]+?\.[a-zA-Z]{2,3}$/; 
         if(!usuario.email){
             erros.push('O campo email é obrigatório.')
-        }else if(!usuario.email.match(/^[a-z0-9.]+@[a-z0-9]+\.[a-z]/)){
+        }else if(!usuario.email.match(emailPattern)){
             erros.push('Informe um email válido.')
+        }
+
+        if(usuario.senha.length < 8){
+            erros.push('Sua senha deve conter no mínimo 8 caracteres.')
         }
 
         if(!usuario.senha || !usuario.senhaRepeticao){

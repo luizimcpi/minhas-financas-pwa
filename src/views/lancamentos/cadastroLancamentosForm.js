@@ -125,7 +125,7 @@ const CadastroLancamentosForm = (props) => {
                           value={valor}
                           onChange={
                               event => {
-                                  setValor(event.target.value)
+                                  setValor(event.target.value.replace(',', '.'))
                                 }
                             }
                       />
