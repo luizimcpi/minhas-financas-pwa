@@ -8,8 +8,8 @@ import Slide from '@material-ui/core/Slide';
 const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
 });
-
-export default function AlertLoading(props) {
+ 
+const AlertLoading = (props) => {
 
   return (
     <React.Fragment>
@@ -30,3 +30,6 @@ export default function AlertLoading(props) {
     </React.Fragment>
   );
 }
+
+
+export default AlertLoading

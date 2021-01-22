@@ -11,7 +11,7 @@ const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
 });
 
-export default function AlertDialogInformation(props) {
+const AlertDialogInformation = (props) => {
 
   return (
     <React.Fragment>
@@ -22,7 +22,7 @@ export default function AlertDialogInformation(props) {
         aria-labelledby="alert-dialog-slide-title"
         aria-describedby="alert-dialog-slide-description"
       >
-        <DialogTitle id="alert-dialog-slide-title">{"Aviso !"}</DialogTitle>
+        <DialogTitle id="alert-dialog-slide-title">Aviso !</DialogTitle>
         <DialogContent>
           <DialogContentText id="alert-dialog-slide-description">
             {props.mensagemCustomizada}
@@ -37,3 +37,5 @@ export default function AlertDialogInformation(props) {
     </React.Fragment>
   );
 }
+
+export default AlertDialogInformation
