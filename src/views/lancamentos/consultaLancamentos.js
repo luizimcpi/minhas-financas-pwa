@@ -67,6 +67,10 @@ class ConsultaLancamentos extends React.Component{
         this.props.history.push(`/cadastro-lancamentos/${id}`)
     }
 
+    redirectHome = () => {
+        this.props.history.push('/home')
+    }
+
     aoAlterarStatus = (lancamento, status) => {
         const usuarioLogado = this.context.usuarioAutenticado
         this.setState({showLoadingDialog: true})
@@ -119,7 +123,7 @@ class ConsultaLancamentos extends React.Component{
 
         return (
             <React.Fragment>
-                <ConsultaLancamentosForm meses={meses} tipos={tipos} buscar={this.aoBuscarForm} cadastrar={this.aoCadastrarForm}/>   
+                <ConsultaLancamentosForm meses={meses} tipos={tipos} buscar={this.aoBuscarForm} cadastrar={this.aoCadastrarForm} home={this.redirectHome}/>   
                 <LancamentosTable 
                     lancamentos={this.state.lancamentos} 
                     alterarStatus={this.aoAlterarStatus}

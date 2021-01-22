@@ -79,8 +79,8 @@ class CadastroLancamentos extends React.Component {
         this.lancamentoService
         .salvar(lancamento, usuarioLogado)
         .then( response => {
-            this.props.history.push('/consulta-lancamentos')
             this.setState({showLoadingDialog: false, showInfoDialog: true, mensagemAlerta: 'Lançamento cadastrado com sucesso!'})
+            this.props.history.push('/consulta-lancamentos')
         }).catch(error => {
             this.setState({showLoadingDialog: false, showInfoDialog: true, mensagemAlerta: error.response.data})
         })
@@ -88,8 +88,7 @@ class CadastroLancamentos extends React.Component {
 
     atualizar = (dados) => {
         const usuarioLogado = this.context.usuarioAutenticado
-        console.log('dadoss aqui no atualizar ', dados)
-
+    
         const { descricao, valor, mes, ano, tipo, status, id} = dados
         const lancamento = { descricao, valor, mes, ano, tipo, status, id }
 
@@ -98,8 +97,8 @@ class CadastroLancamentos extends React.Component {
         this.lancamentoService
         .atualizar(lancamento, usuarioLogado)
         .then( response => {
-            this.props.history.push('/consulta-lancamentos')
             this.setState({showLoadingDialog: false, showInfoDialog: true, mensagemAlerta: 'Lançamento atualizado com sucesso!'})
+            this.props.history.push('/consulta-lancamentos')
         }).catch(error => {
             this.setState({showLoadingDialog: false, showInfoDialog: true, mensagemAlerta: error.response.data})
         })

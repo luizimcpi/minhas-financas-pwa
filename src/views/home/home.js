@@ -15,6 +15,15 @@ class Home extends React.Component {
         this.usuarioService = new UsuarioService();
     }
 
+    aoConsultarLancamentos = () => {
+        this.props.history.push('/consulta-lancamentos')
+    }
+
+    aoSair = () => {
+        this.context.encerrarSessao()
+        this.props.history.push('/login')
+    }
+    
     componentDidMount(){
         const usuarioLogado = this.context.usuarioAutenticado
         
@@ -29,10 +38,11 @@ class Home extends React.Component {
 
     render(){
         return(   
-            <HomeCard data={this.state}/>
+            <HomeCard data={this.state} consultar={this.aoConsultarLancamentos} deslogar={this.aoSair}/>
         )
     }
 }
+
 
 Home.contextType = AuthContext
 

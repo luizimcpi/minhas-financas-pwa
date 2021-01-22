@@ -5,7 +5,6 @@ import AppBar from '@material-ui/core/AppBar';
 import ProvedorAutenticacao from './provedorAutenticacao'
 import React from 'react';
 import Rotas from './rotas'
-import SimpleMenu from './components/simpleMenu'
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
@@ -34,7 +33,7 @@ function App() {
             <Typography variant="h6" className={classes.title}>
               $ Minhas Finanças
             </Typography>
-            <SimpleMenu />
+            {/* <SimpleMenu /> */}
           </Toolbar>
         </AppBar>
         <Rotas />

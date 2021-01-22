@@ -93,7 +93,7 @@ export default function LoginForm({entrar, usuarios}) {
                   <Button type="submit" variant="contained" color="primary">
                     Entrar
                   </Button>
-                  <Button variant="outlined" color="secondary" onClick={usuarios}>Usuários</Button>
+                  <Button variant="outlined" color="secondary" onClick={usuarios}>Cadastro</Button>
                 </CardActions>
             </Card>
         </Grid>

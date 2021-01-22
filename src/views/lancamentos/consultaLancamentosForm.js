@@ -6,6 +6,8 @@ import CardActions from '@material-ui/core/CardActions';
 import CardContent from '@material-ui/core/CardContent';
 import { FormControl } from '@material-ui/core';
 import Grid from '@material-ui/core/Grid';
+import HomeIcon from '@material-ui/icons/Home';
+import IconButton from '@material-ui/core/IconButton';
 import Select from '@material-ui/core/Select';
 import TextField from '@material-ui/core/TextField';
 import Typography from '@material-ui/core/Typography';
@@ -33,7 +35,7 @@ const useStyles = makeStyles((theme) => ({
 }));
   
 
-export default function ConsultaLancamentoForm({meses, tipos, buscar, cadastrar}) {
+export default function ConsultaLancamentoForm({meses, tipos, buscar, cadastrar, home}) {
   const classes = useStyles();
   const [ano, setAno] = useState("")
   const [mes, setMes] = useState("")
@@ -137,6 +139,14 @@ export default function ConsultaLancamentoForm({meses, tipos, buscar, cadastrar}
                         <Button variant="contained" color="secondary" onClick={cadastrar}>
                             Cadastrar
                         </Button>
+                        <IconButton 
+                          color="secondary" 
+                          aria-label="home" 
+                          component="span"
+                          onClick={home}
+                        >
+                          <HomeIcon />
+                        </IconButton>
                       </CardActions>
                   </Card>
               </Grid>

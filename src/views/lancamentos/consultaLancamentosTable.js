@@ -24,7 +24,7 @@ const LancamentosTable = (props) => {
       <TableCell align="right">{currencyFormatter.format(lancamento.valor, {locale: 'pt-BR'})}</TableCell>
       <TableCell align="right">{lancamento.tipo}</TableCell>
       <TableCell align="right">{lancamento.mes}</TableCell>
-      <TableCell align="right">{lancamento.status}</TableCell>
+      <TableCell align="right">{lancamento.status === 'EFETIVADO' ? 'PAGO' : lancamento.status}</TableCell>
     
       <TableCell align="right"> 
         <label htmlFor="icon-button-file">

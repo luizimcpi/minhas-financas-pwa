@@ -25,11 +25,11 @@ const useStyles = makeStyles({
   },
 });
 
-export default function HomeCard({data}) {
+export default function HomeCard({data, consultar, deslogar}) {
   const classes = useStyles();  
   const saldoAtual = data.saldo
   const nomeUsuario = data.usuario
- 
+
   return (
     <Grid container spacing={3}>
         <Grid item xs={12}>
@@ -51,8 +51,8 @@ export default function HomeCard({data}) {
                     </Typography>
                 </CardContent>
                 <CardActions>
-                    <Button variant="outlined" color="secondary" href="#/cadastro-usuarios" size="small">Usuários</Button>
-                    <Button variant="contained" color="primary" href="#/consulta-lancamentos" size="small">Lançamentos</Button>
+                    <Button variant="contained" color="primary" onClick={consultar} size="small">Lançamentos</Button>
+                    <Button variant="contained" color="secondary" onClick={deslogar} size="small">Sair</Button>
                 </CardActions>
             </Card>
         </Grid>

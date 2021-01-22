@@ -1,10 +1,11 @@
+import AlertDialogInformation from '../../components/alertDialogInformation'
+import AlertLoading from '../../components/alertLoading'
 import { AuthContext } from '../../provedorAutenticacao'
 import LoginForm from './loginForm';
 import React from 'react';
 import UsuarioService from '../../app/service/usuarioService'
+import httpStatus from 'http-status'
 import { withRouter } from 'react-router-dom'
-import AlertDialogInformation from '../../components/alertDialogInformation'
-import AlertLoading from '../../components/alertLoading'
 
 class Login extends React.Component {
 
@@ -41,7 +42,11 @@ class Login extends React.Component {
             this.context.iniciarSessao(response.data) 
             this.props.history.push('/home')
         }).catch( erro => {
-            this.setState({showLoadingDialog: false, showInfoDialog: true, mensagemAlerta: 'Nome de usuário / senha inválido(s), tente novamente ou mais tarde...'})
+            if(erro.response.status === httpStatus.FORBIDDEN) {
+                this.setState({showLoadingDialog: false, showInfoDialog: true, mensagemAlerta: 'Nome de usuário / senha inválido(s), tente novamente ou mais tarde...'})
+            } else {
+                this.setState({showLoadingDialog: false, showInfoDialog: true, mensagemAlerta: 'Ocorreu um erro inesperado... Entre em contato com o Administrador.'})
+            }
         })
     }
 
