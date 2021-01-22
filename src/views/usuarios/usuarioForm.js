@@ -28,6 +28,7 @@ const useStyles = makeStyles((theme) => ({
   cardContent: {
     textAlign: "center", 
     justifyContent: "center",
+    marginTop: 80,
   },
 }));
   

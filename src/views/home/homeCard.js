@@ -23,6 +23,9 @@ const useStyles = makeStyles({
   pos: {
     marginBottom: 12,
   },
+  cardContent: {
+    marginTop: 80,
+  },
 });
 
 export default function HomeCard({data, consultar, deslogar}) {
@@ -34,7 +37,7 @@ export default function HomeCard({data, consultar, deslogar}) {
     <Grid container spacing={3}>
         <Grid item xs={12}>
             <Card className={classes.root}>
-                <CardContent>
+                <CardContent className={classes.cardContent}>
                     <Typography className={classes.title} color="textSecondary" gutterBottom>
                     Olá, {nomeUsuario}
                     </Typography>

@@ -28,7 +28,7 @@ function App() {
   return (
     <React.Fragment>
       <ProvedorAutenticacao>
-        <AppBar position="static">
+        <AppBar position="fixed">
           <Toolbar>
             <Typography variant="h6" className={classes.title}>
               $ Minhas Finanças
