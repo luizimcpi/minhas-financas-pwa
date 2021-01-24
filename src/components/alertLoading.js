@@ -1,4 +1,4 @@
-// import CircularProgress from '@material-ui/core/CircularProgress';
+import CircularProgress from '@material-ui/core/CircularProgress';
 import Dialog from '@material-ui/core/Dialog';
 import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
@@ -22,8 +22,7 @@ const AlertLoading = (props) => {
       >
         <DialogContent>
           <DialogContentText id="alert-dialog-slide-description">
-            {/* <CircularProgress /> */}
-            Carregando...
+             <CircularProgress />
           </DialogContentText>
         </DialogContent>
       </Dialog>
