@@ -1,41 +1,22 @@
-import 'fontsource-roboto';
-import './App.css';
+import 'fontsource-roboto'
+// import 'startbootstrap-sb-admin-2/vendor/jquery/jquery.min.js'
+// import 'startbootstrap-sb-admin-2/vendor/jquery-easing/jquery.easing.min.js'
+import 'startbootstrap-sb-admin-2/css/sb-admin-2.min.css'
+import 'startbootstrap-sb-admin-2/vendor/fontawesome-free/css/all.min.css'
+import 'startbootstrap-sb-admin-2/vendor/bootstrap/js/bootstrap.bundle.min.js'
 
-import AppBar from '@material-ui/core/AppBar';
 import ProvedorAutenticacao from './provedorAutenticacao'
 import React from 'react';
 import Rotas from './rotas'
-import Toolbar from '@material-ui/core/Toolbar';
-import Typography from '@material-ui/core/Typography';
-import { makeStyles } from '@material-ui/core/styles';
 
-const useStyles = makeStyles((theme) => ({
-  root: {
-    flexGrow: 1,
-  },
-  menuButton: {
-    marginRight: theme.spacing(2),
-  },
-  title: {
-    flexGrow: 1,
-  },
-}));
+// import 'startbootstrap-sb-admin-2/js/sb-admin-2.min.js'
+
 
 function App() {
-  
-  const classes = useStyles();
   
   return (
     <React.Fragment>
       <ProvedorAutenticacao>
-        <AppBar position="fixed">
-          <Toolbar>
-            <Typography variant="h6" className={classes.title}>
-              $ Minhas Finanças
-            </Typography>
-            {/* <SimpleMenu /> */}
-          </Toolbar>
-        </AppBar>
         <Rotas />
       </ProvedorAutenticacao>
     </React.Fragment>
