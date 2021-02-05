@@ -1,5 +1,7 @@
 import { React, useState } from 'react';
 
+import moneyImg from '../../money.jpg'
+
 export default function LoginForm({entrar, usuarios}) {
 
   const [email, setEmail] = useState("")
@@ -15,11 +17,13 @@ export default function LoginForm({entrar, usuarios}) {
             <div className="card o-hidden border-0 shadow-lg my-5">
               <div className="card-body p-0">
                 <div className="row">
-                  <div className="col-lg-6 d-none d-lg-block bg-login-image"></div>
+                  <div className="col-lg-6">
+                    <img className="img-login"  alt="" src={moneyImg}/>
+                  </div>
                   <div className="col-lg-6">
                     <div className="p-5">
                       <div className="text-center">
-                        <h1 className="h4 text-gray-900 mb-4">Minhas Finanças</h1>
+                        <h1 className="h4 text-gray-900 mb-4">SISO - Sistema Orçamentário</h1>
                       </div>
                       <form className="user" onSubmit={
                       (event) => {
@@ -52,10 +56,10 @@ export default function LoginForm({entrar, usuarios}) {
                                     }
                           }/>
                         </div>
-                        <button type="submit" class="btn btn-primary btn-user btn-block">Login</button>
+                        <button type="submit" className="btn btn-primary btn-user btn-block">Login</button>
                         <hr/>
                       </form>
-                      <button type="button" class="btn btn-secondary btn-user btn-block" onClick={usuarios}>Cadastre-se</button>
+                      <button type="button" className="btn btn-secondary btn-user btn-block" onClick={usuarios}>Cadastre-se</button>
                     </div>
                   </div>
                 </div>
