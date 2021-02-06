@@ -1,41 +1,28 @@
-import Button from '@material-ui/core/Button';
-import Dialog from '@material-ui/core/Dialog';
-import DialogActions from '@material-ui/core/DialogActions';
-import DialogContent from '@material-ui/core/DialogContent';
-import DialogContentText from '@material-ui/core/DialogContentText';
-import DialogTitle from '@material-ui/core/DialogTitle';
 import React from 'react';
-import Slide from '@material-ui/core/Slide';
-
-const Transition = React.forwardRef(function Transition(props, ref) {
-  return <Slide direction="up" ref={ref} {...props} />;
-});
 
 const AlertDialogInformation = (props) => {
-
-  return (
-    <React.Fragment>
-      <Dialog
-        open={props.open}
-        TransitionComponent={Transition}
-        keepMounted
-        aria-labelledby="alert-dialog-slide-title"
-        aria-describedby="alert-dialog-slide-description"
-      >
-        <DialogTitle id="alert-dialog-slide-title">Aviso !</DialogTitle>
-        <DialogContent>
-          <DialogContentText id="alert-dialog-slide-description">
-            {props.mensagemCustomizada}
-          </DialogContentText>
-        </DialogContent>
-        <DialogActions>
-          <Button onClick={props.close} color="primary">
-            Ok
-          </Button>
-        </DialogActions>
-      </Dialog>
-    </React.Fragment>
-  );
+    return (
+          <div className="modal fade show" 
+            id="infoModal" 
+            tabIndex="-1" 
+            aria-labelledby="exampleModalLabel" 
+            aria-modal="true" role="dialog"
+            style={{ display: props.open ? 'block': 'none'}}>
+            <div className="modal-dialog" role="document">
+              <div className="modal-content">
+                  <div className="modal-header">
+                      <h5 className="modal-title" id="exampleModalLabel">Aviso...</h5>
+                  </div>
+                  <div className="modal-body">
+                    {props.mensagemCustomizada}
+                  </div>
+                  <div className="modal-footer">
+                    <button className="btn btn-secondary" onClick={props.close} type="button" data-dismiss="modal">Fechar</button>
+                </div>
+              </div>
+            </div>
+          </div>
+    );
 }
 
 export default AlertDialogInformation

@@ -58,8 +58,8 @@ export default function LoginForm({entrar, usuarios}) {
                         </div>
                         <button type="submit" className="btn btn-primary btn-user btn-block">Login</button>
                         <hr/>
+                        <button type="button" className="btn btn-warning btn-user btn-block" onClick={usuarios}>Cadastre-se</button>
                       </form>
-                      <button type="button" className="btn btn-secondary btn-user btn-block" onClick={usuarios}>Cadastre-se</button>
                     </div>
                   </div>
                 </div>
