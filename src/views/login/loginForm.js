@@ -1,6 +1,6 @@
 import { React, useState } from 'react';
 
-import moneyImg from '../../money.jpg'
+import moneyImg from '../../money-free.jpg'
 
 export default function LoginForm({entrar, usuarios}) {
 

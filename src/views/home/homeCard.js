@@ -542,7 +542,7 @@ export default function HomeCard({data, consultar, deslogar}) {
                                         <img className="img-fluid px-3 px-sm-4 mt-3 mb-4" cssstyle="width: 25rem;"
                                             src="img/undraw_posting_photo.svg" alt=""/>
                                     </div>
-                                    <p><h3>Jeff Bezos de volta para o futuro</h3></p>
+                                    <h3>Jeff Bezos de volta para o futuro</h3>
                                     <p>O cara que reinventou o jeito de vender de todo o varejo deixará comando da Amazon para se dedicar a suas novas fronteiras: mídia, filantropia, aquecimento global e viagens espaciais.</p>
                                     <a target="_blank" rel="noreferrer" href="https://www.istoedinheiro.com.br/">leia mais em:
                                         Istoé Dinheiro &rarr;</a>

@@ -1,144 +1,95 @@
 import { React, useState } from 'react';
-
-import Button from '@material-ui/core/Button';
-import Card from '@material-ui/core/Card';
-import CardActions from '@material-ui/core/CardActions';
-import CardContent from '@material-ui/core/CardContent';
-import { FormControl } from '@material-ui/core';
-import Grid from '@material-ui/core/Grid';
-import TextField from '@material-ui/core/TextField';
-import Typography from '@material-ui/core/Typography';
-import { makeStyles } from '@material-ui/core/styles';
-
-const useStyles = makeStyles((theme) => ({
-  root: {
-    flexGrow: 1,
-  },
-  paper: {
-    padding: theme.spacing(1),
-    textAlign: 'center',
-    color: theme.palette.text.secondary,
-  },
-  formControlTextField: {
-    width: '30ch',
-  },
-  cardAction: {
-    justifyContent: "center",
-  },
-  cardContent: {
-    textAlign: "center", 
-    justifyContent: "center",
-    marginTop: 80,
-  },
-}));
   
-
-export default function UsuarioForm({cadastrar}) {
-  const classes = useStyles();
+export default function UsuarioForm({cadastrar, voltar}) {
   const [nome, setNome] = useState("")
   const [email, setEmail] = useState("")
   const [senha, setSenha] = useState("")
   const [senhaRepeticao, setSenhaRepeticao] = useState("")
 
   return (
-    <div className={classes.root}>
-     <form onSubmit={
-                (event) => {
-                    event.preventDefault();
-                    cadastrar({nome, email, senha, senhaRepeticao});
-                }
-            }>
+    <div className="container">
+    <div className="row justify-content-center">
 
-      <Grid container spacing={3}>
-        <Grid item xs={12}>
-            <Card className={classes.root}>
-                <CardContent className={classes.cardContent}>
-                    <Typography variant="h3" gutterBottom>
-                      Cadastro de Usuário
-                    </Typography>
-                    <FormControl className={classes.formControlTextField}>
-                      <TextField id="outlined-full-width-nome" label="Nome" fullWidth
-                          margin="normal"
-                          InputLabelProps={{
-                              shrink: true,
-                          }}
-                          variant="outlined"
-                          value={nome}
-                          onChange={
-                              event => {
-                                  setNome(event.target.value);
+      <div className="col-xl-10 col-lg-12 col-md-9">
+
+        <div className="card o-hidden border-0 shadow-lg my-5">
+          <div className="card-body p-0">
+            <div className="row">
+              <div className="col-lg-12">
+                <div className="p-5">
+                  <div className="text-center">
+                    <h1 className="h4 text-gray-900 mb-4">Cadastro de Usuário</h1>
+                  </div>
+                  <form className="user" onSubmit={
+                    (event) => {
+                        event.preventDefault();
+                        cadastrar({nome, email, senha, senhaRepeticao});
+                    }
+                  }>
+                    <div className="form-group">
+                      <input type="text" className="form-control form-control-user" 
+                              id="exampleInputNome" 
+                              aria-describedby="nomeHelp" 
+                              placeholder="Nome..."
+                              value={nome}
+                              onChange={
+                                  event => {
+                                      setNome(event.target.value);
+                                  }
                               }
-                          }
-                      />
-                    </FormControl><br />
-                    <FormControl className={classes.formControlTextField}>
-                      <TextField id="outlined-full-width-email" label="Email" fullWidth
-                          margin="normal"
-                          InputLabelProps={{
-                              shrink: true,
-                          }}
-                          variant="outlined" 
-                          value={email}
-                          onChange={
-                              event => {
-                                  setEmail(event.target.value);
+                          required/>
+                    </div>
+                    <div className="form-group">
+                      <input type="email" className="form-control form-control-user" 
+                              id="exampleInputEmail" 
+                              aria-describedby="emailHelp" 
+                              placeholder="Email..."
+                              value={email}
+                              onChange={
+                                  event => {
+                                      setEmail(event.target.value);
+                                  }
                               }
-                          }
-                      />
-                    </FormControl><br/>
-                    <FormControl className={classes.formControlTextField}>
-                      <TextField
-                          id="outlined-password-input"
-                          label="Senha"
-                          type="password"
-                          autoComplete="current-password"
-                          fullWidth
-                          margin="normal"
-                          InputLabelProps={{
-                              shrink: true,
-                          }}
-                          variant="outlined"
-                          value={senha}
-                          onChange={
-                              event => {
-                                  setSenha(event.target.value);
-                              }
-                          }
-                      />
-                    </FormControl><br/>
-                    <FormControl className={classes.formControlTextField}>
-                      <TextField
-                          id="outlined-repeated-password-input"
-                          label="Confirmação de Senha"
-                          type="password"
-                          autoComplete="current-password"
-                          fullWidth
-                          margin="normal"
-                          InputLabelProps={{
-                              shrink: true,
-                          }}
-                          variant="outlined"
-                          value={senhaRepeticao}
-                          onChange={
-                              event => {
-                                  setSenhaRepeticao(event.target.value);
-                              }
-                          }
-                      />
-                    </FormControl>
-                </CardContent>
-                <CardActions className={classes.cardAction}>
-                  <Button type="submit" variant="contained" color="primary">
-                    Cadastrar
-                  </Button>
-                  <Button variant="contained" color="secondary" href="#/home">
-                    Cancelar
-                  </Button>
-                </CardActions>
-            </Card>
-        </Grid>
-    </Grid>
-    </form>
+                          />
+                    </div>
+                    <div className="form-group">
+                      <input type="password" 
+                        className="form-control form-control-user" 
+                        id="exampleInputPassword" 
+                        placeholder="Senha"
+                        value={senha}
+                            onChange={
+                                event => {
+                                    setSenha(event.target.value);
+                                }
+                      } required/>
+                    </div>
+                    <div className="form-group">
+                      <input type="password" 
+                        className="form-control form-control-user" 
+                        id="exampleInputConfirmationPassword" 
+                        placeholder="Confirmação de Senha"
+                        value={senhaRepeticao}
+                            onChange={
+                                event => {
+                                    setSenhaRepeticao(event.target.value);
+                                }
+                      } required/>
+                    </div>
+                    <button type="submit" className="btn btn-primary btn-user btn-block">Cadastrar</button>
+                    <hr/>
+                    <button type="button" className="btn btn-danger btn-user btn-block" onClick={voltar}>Cancelar</button>
+                  </form>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+
     </div>
   );
 }
