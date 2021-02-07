@@ -13,6 +13,7 @@ import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import currencyFormatter from 'currency-formatter'
 
+
 const LancamentosTable = (props) => {
   
   const rows = props.lancamentos.map( lancamento => {
@@ -79,23 +80,23 @@ const LancamentosTable = (props) => {
   })
 
   return (
-    <TableContainer component={Paper}>
-    <Table size="small" aria-label="a dense table">
-      <TableHead>
-        <TableRow>
-          <TableCell><b>Descrição</b></TableCell>
-          <TableCell align="right"><b>Valor</b></TableCell>
-          <TableCell align="right"><b>Tipo</b></TableCell>
-          <TableCell align="right"><b>Mês</b></TableCell>
-          <TableCell align="right"><b>Situação</b></TableCell>
-          <TableCell align="right"><b>Ações</b></TableCell>
-        </TableRow>
-      </TableHead>
-      <TableBody>
-        {rows}
-      </TableBody>
-      </Table>
-    </TableContainer>
+        <TableContainer component={Paper}>
+        <Table size="small" aria-label="a dense table">
+          <TableHead>
+            <TableRow>
+              <TableCell><b>Descrição</b></TableCell>
+              <TableCell align="right"><b>Valor</b></TableCell>
+              <TableCell align="right"><b>Tipo</b></TableCell>
+              <TableCell align="right"><b>Mês</b></TableCell>
+              <TableCell align="right"><b>Situação</b></TableCell>
+              <TableCell align="right"><b>Ações</b></TableCell>
+            </TableRow>
+          </TableHead>
+          <TableBody>
+            {rows}
+          </TableBody>
+          </Table>
+        </TableContainer>
   )
 }
 

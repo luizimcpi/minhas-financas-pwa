@@ -31,7 +31,7 @@ class Home extends React.Component {
         .then( response => {
             this.setState({saldo: response.data, usuario: usuarioLogado.nome})
         }).catch( error => {
-            alert('Erro ao obter saldo do usuário.')
+            this.setState({saldo: 0, usuario: usuarioLogado.nome})
             console.error(error.response);
         });
     }
