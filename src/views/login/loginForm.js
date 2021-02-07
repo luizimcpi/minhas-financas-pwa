@@ -42,7 +42,7 @@ export default function LoginForm({entrar, usuarios}) {
                                           setEmail(event.target.value);
                                       }
                                   }
-                              />
+                              required/>
                         </div>
                         <div className="form-group">
                           <input type="password" 
@@ -54,7 +54,8 @@ export default function LoginForm({entrar, usuarios}) {
                                     event => {
                                         setSenha(event.target.value);
                                     }
-                          }/>
+                                }
+                          required/>
                         </div>
                         <button type="submit" className="btn btn-primary btn-user btn-block">Login</button>
                         <hr/>
