@@ -27,7 +27,7 @@ const Sidebar = () => {
             <hr className="sidebar-divider"/>
 
         
-            <div className="sidebar-heading">
+            {/* <div className="sidebar-heading">
                 Interface
             </div>
 
@@ -45,10 +45,10 @@ const Sidebar = () => {
                         <a className="collapse-item" href="cards.html">Cards</a>
                     </div>
                 </div>
-            </li>
+            </li> */}
 
             
-            <li className="nav-item">
+            {/* <li className="nav-item">
                 <a className="nav-link collapsed" href="/" data-toggle="collapse" data-target="#collapseUtilities"
                     aria-expanded="true" aria-controls="collapseUtilities">
                     <i className="fas fa-fw fa-wrench"></i>
@@ -64,18 +64,18 @@ const Sidebar = () => {
                         <a className="collapse-item" href="utilities-other.html">Other</a>
                     </div>
                 </div>
-            </li>
+            </li> */}
 
             
-            <hr className="sidebar-divider"/>
+            {/* <hr className="sidebar-divider"/> */}
 
             
             <div className="sidebar-heading">
-                Addons
+                Funcionalidades
             </div>
 
             
-            <li className="nav-item">
+            {/* <li className="nav-item">
                 <a className="nav-link collapsed" href="/" data-toggle="collapse" data-target="#collapsePages"
                     aria-expanded="true" aria-controls="collapsePages">
                     <i className="fas fa-fw fa-folder"></i>
@@ -93,22 +93,27 @@ const Sidebar = () => {
                         <a className="collapse-item" href="blank.html">Blank Page</a>
                     </div>
                 </div>
+            </li> */}
+
+            <li className="nav-item">
+                <a className="nav-link" href="#/consulta-lancamentos">
+                    <i className="fas fa-fw fa-table"></i>
+                    <span>Lançamentos</span></a>
             </li>
 
-        
             <li className="nav-item">
-                <a className="nav-link" href="charts.html">
+                <a className="nav-link" href="#/home">
                     <i className="fas fa-fw fa-chart-area"></i>
-                    <span>Charts</span></a>
+                    <span>Gráficos - Em Breve</span></a>
+            </li>
+
+            <li className="nav-item">
+                <a className="nav-link" href="#/home">
+                    <i className="fas fa-fw fa-scroll"></i>
+                    <span>Relatórios - Em Breve</span></a>
             </li>
 
             
-            <li className="nav-item">
-                <a className="nav-link" href="tables.html">
-                    <i className="fas fa-fw fa-table"></i>
-                    <span>Tables</span></a>
-            </li>
-
             
             <hr className="sidebar-divider d-none d-md-block"/>
 

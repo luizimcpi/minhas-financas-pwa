@@ -193,7 +193,7 @@ const Navbar = (props) => {
                             <i className="fas fa-list fa-sm fa-fw mr-2 text-gray-400"></i>
                             Activity Log
                         </a> */}
-                        <div className="dropdown-divider"></div>
+                        {/* <div className="dropdown-divider"></div> */}
                         <a className="dropdown-item" href="/" onClick={props.deslogar} data-toggle="modal" data-target="#logoutModal">
                             <i className="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
                             Sair

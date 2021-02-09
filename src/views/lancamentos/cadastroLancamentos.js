@@ -2,8 +2,11 @@ import AlertDialogInformation from '../../components/alertDialogInformation'
 import AlertLoading from '../../components/alertLoading'
 import { AuthContext } from '../../provedorAutenticacao'
 import CadastroLancamentosForm from './cadastroLancamentosForm'
+import Footer from '../../components/footer'
 import LancamentoService from '../../app/service/lancamentoService'
+import Navbar from '../../components/navbar'
 import React from 'react'
+import Sidebar from '../../components/sidebar'
 import { withRouter } from 'react-router-dom'
 
 class CadastroLancamentos extends React.Component {
@@ -108,28 +111,42 @@ class CadastroLancamentos extends React.Component {
         this.props.history.push('/consulta-lancamentos')
     }
 
+    aoSair = () => {
+        this.context.encerrarSessao()
+        this.props.history.push('/login')
+    }
+    
     render(){
 
         const tipos = this.lancamentoService.obterListaTipos()
         const meses = this.lancamentoService.obterListaMeses()
 
         return (
-            <React.Fragment>
-                <CadastroLancamentosForm 
-                    meses={meses} 
-                    tipos={tipos} 
-                    cancelar={this.cancelar} 
-                    cadastrar={this.submit} 
-                    atualizar={this.atualizar} 
-                    lancamentoAtualizar={this.state.lancamentoAtualizar}
-                    />
-                <AlertDialogInformation 
-                        open={this.state.showInfoDialog} 
-                        close={this.fecharAlertaAviso} 
-                        mensagemCustomizada={this.state.mensagemAlerta} 
-                    />  
-                <AlertLoading open={this.state.showLoadingDialog} />
-            </React.Fragment>
+            <div id="wrapper">
+                <Sidebar/>
+                <div id="content-wrapper" className="d-flex flex-column">
+                    <Navbar nomeUsuario={this.context.usuarioAutenticado.nome} deslogar={this.aoSair}/>
+                    <div id="content">
+                        <div className="container-fluid">
+                            <CadastroLancamentosForm 
+                                meses={meses} 
+                                tipos={tipos} 
+                                cancelar={this.cancelar} 
+                                cadastrar={this.submit} 
+                                atualizar={this.atualizar} 
+                                lancamentoAtualizar={this.state.lancamentoAtualizar}
+                                />
+                            <AlertDialogInformation 
+                                    open={this.state.showInfoDialog} 
+                                    close={this.fecharAlertaAviso} 
+                                    mensagemCustomizada={this.state.mensagemAlerta} 
+                                />  
+                            <AlertLoading open={this.state.showLoadingDialog} />
+                        </div>
+                    </div>
+                    <Footer/>
+                </div>
+            </div>
         )
     }
 }
