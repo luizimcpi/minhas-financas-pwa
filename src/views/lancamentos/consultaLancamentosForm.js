@@ -1,6 +1,6 @@
 import { React, useState } from 'react';
 
-export default function ConsultaLancamentoForm({meses, tipos, buscar, cadastrar, home}) {
+export default function ConsultaLancamentoForm({meses, tipos, buscar, cadastrar}) {
   const [ano, setAno] = useState("")
   const [mes, setMes] = useState("")
   const [tipo, setTipo] = useState("")
@@ -86,7 +86,7 @@ export default function ConsultaLancamentoForm({meses, tipos, buscar, cadastrar,
                     </div>
                     <button type="submit" className="btn btn-primary btn-user btn-block">Buscar</button>
                     <hr/>
-                    <button type="button" className="btn btn-secondary btn-user btn-block" onClick={cadastrar}>Cadastrar</button>
+                    <button type="button" className="btn btn-success btn-user btn-block" onClick={cadastrar}>Cadastrar</button>
                   </form>
                 </div>
               </div>

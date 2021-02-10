@@ -1,9 +1,8 @@
+import Footer from '../../components/footer'
+import Navbar from '../../components/navbar'
 import React from 'react'
 import Sidebar from '../../components/sidebar'
-import Navbar from '../../components/navbar'
-import Footer from '../../components/footer'
 import currencyFormatter from 'currency-formatter'
-
 
 export default function HomeCard({data, consultar, deslogar}) {
   const saldoAtual = data.saldo
@@ -319,12 +318,9 @@ export default function HomeCard({data, consultar, deslogar}) {
                                         <img className="img-fluid px-3 px-sm-4 mt-3 mb-4" cssstyle="width: 25rem;"
                                             src="img/undraw_posting_photo.svg" alt=""/>
                                     </div>
-                                    <p>Add some quality, svg illustrations to your project courtesy of <a
-                                            target="_blank" rel="noreferrer" href="https://undraw.co/">unDraw</a>, a
-                                        constantly updated collection of beautiful svg images that you can use
-                                        completely free and without attribution!</p>
-                                    <a target="_blank" rel="noreferrer" href="https://undraw.co/">Browse Illustrations on
-                                        unDraw &rarr;</a>
+                                    <p>Tente guardar pelo menos 10% de suas receitas todos os 
+                                    meses em alguma conta que possua um rendimento fixo. Ex: CDI</p>
+                                    <a target="_blank" rel="noreferrer" href="https://blog.rico.com.vc/o-que-e-cdi">O que é CDI?</a>
                                 </div>
                             </div>
 

@@ -13,7 +13,7 @@ const LancamentosTable = (props) => {
         <td>{lancamento.status === 'EFETIVADO' ? 'PAGO' : lancamento.status}</td>
         <td>
           <button type="button" 
-            className="btn btn-primary btn-user btn-block" 
+            className="btn btn-success btn-user btn-block" 
             disabled={lancamento.status !== 'PENDENTE'} 
             onClick={e => props.alterarStatus(lancamento, 'EFETIVADO')}>
             <i className="fa fa-check"></i>
@@ -25,6 +25,13 @@ const LancamentosTable = (props) => {
             onClick={e => props.alterarStatus(lancamento, 'CANCELADO')}>
               <i className="fa fa-window-close"></i>
           </button>
+
+          <button type="button" 
+            className="btn btn-primary btn-user btn-block" 
+            onClick={e => props.editarAction(lancamento.id)}>
+              <i className="fa fa-edit"></i>
+          </button>
+
 
           <button type="button"  
             className="btn btn-danger btn-user btn-block" 

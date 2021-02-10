@@ -3,13 +3,13 @@ import AlertDialogSlide from './alertDialogSlide'
 import AlertLoading from '../../components/alertLoading'
 import { AuthContext } from '../../provedorAutenticacao'
 import ConsultaLancamentosForm from './consultaLancamentosForm'
+import Footer from '../../components/footer'
 import LancamentoService from '../../app/service/lancamentoService'
 import LancamentosTable from './consultaLancamentosTable'
-import React from 'react'
-import { withRouter } from 'react-router-dom'
-import Sidebar from '../../components/sidebar'
 import Navbar from '../../components/navbar'
-import Footer from '../../components/footer'
+import React from 'react'
+import Sidebar from '../../components/sidebar'
+import { withRouter } from 'react-router-dom'
 
 class ConsultaLancamentos extends React.Component{
 
@@ -68,10 +68,6 @@ class ConsultaLancamentos extends React.Component{
 
     editar = (id) => {
         this.props.history.push(`/cadastro-lancamentos/${id}`)
-    }
-
-    redirectHome = () => {
-        this.props.history.push('/home')
     }
 
     aoAlterarStatus = (lancamento, status) => {
@@ -136,7 +132,7 @@ class ConsultaLancamentos extends React.Component{
                     <Navbar nomeUsuario={this.context.usuarioAutenticado.nome} deslogar={this.aoSair}/>
                     <div id="content">
                         <div className="container-fluid">
-                            <ConsultaLancamentosForm meses={meses} tipos={tipos} buscar={this.aoBuscarForm} cadastrar={this.aoCadastrarForm} home={this.redirectHome}/>   
+                            <ConsultaLancamentosForm meses={meses} tipos={tipos} buscar={this.aoBuscarForm} cadastrar={this.aoCadastrarForm}/>   
                             <LancamentosTable 
                                 lancamentos={this.state.lancamentos} 
                                 alterarStatus={this.aoAlterarStatus}
