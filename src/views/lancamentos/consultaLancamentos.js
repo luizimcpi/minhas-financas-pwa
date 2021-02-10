@@ -3,9 +3,12 @@ import AlertDialogSlide from './alertDialogSlide'
 import AlertLoading from '../../components/alertLoading'
 import { AuthContext } from '../../provedorAutenticacao'
 import ConsultaLancamentosForm from './consultaLancamentosForm'
+import Footer from '../../components/footer'
 import LancamentoService from '../../app/service/lancamentoService'
 import LancamentosTable from './consultaLancamentosTable'
+import Navbar from '../../components/navbar'
 import React from 'react'
+import Sidebar from '../../components/sidebar'
 import { withRouter } from 'react-router-dom'
 
 class ConsultaLancamentos extends React.Component{
@@ -16,7 +19,7 @@ class ConsultaLancamentos extends React.Component{
         showLoadingDialog: false,
         showConfirmDialog: false,
         lancamentoDeletar: {},
-        lancamentos: []
+        lancamentos: [],
     }
     
     constructor(){
@@ -67,10 +70,6 @@ class ConsultaLancamentos extends React.Component{
         this.props.history.push(`/cadastro-lancamentos/${id}`)
     }
 
-    redirectHome = () => {
-        this.props.history.push('/home')
-    }
-
     aoAlterarStatus = (lancamento, status) => {
         const usuarioLogado = this.context.usuarioAutenticado
         this.setState({showLoadingDialog: true})
@@ -116,34 +115,48 @@ class ConsultaLancamentos extends React.Component{
         })
     }
 
+    aoSair = () => {
+        this.context.encerrarSessao()
+        this.props.history.push('/login')
+    }
+
     render(){
 
         const meses = this.service.obterListaMeses()
         const tipos = this.service.obterListaTipos()    
 
         return (
-            <React.Fragment>
-                <ConsultaLancamentosForm meses={meses} tipos={tipos} buscar={this.aoBuscarForm} cadastrar={this.aoCadastrarForm} home={this.redirectHome}/>   
-                <LancamentosTable 
-                    lancamentos={this.state.lancamentos} 
-                    alterarStatus={this.aoAlterarStatus}
-                    deletarAction={this.abrirConfirmacao}
-                    editarAction={this.editar}
-                /> 
-                <AlertDialogSlide 
-                    open={this.state.showConfirmDialog} 
-                    lancamentoInfo={this.state.lancamentoDeletar}
-                    deletarAction={this.deletar} 
-                    cancelarAction={this.cancelarDelecao} />   
+            <div id="wrapper">
+                <Sidebar/>
+                <div id="content-wrapper" className="d-flex flex-column">
+                    <Navbar nomeUsuario={this.context.usuarioAutenticado.nome} deslogar={this.aoSair}/>
+                    <div id="content">
+                        <div className="container-fluid">
+                            <ConsultaLancamentosForm meses={meses} tipos={tipos} buscar={this.aoBuscarForm} cadastrar={this.aoCadastrarForm}/>   
+                            <LancamentosTable 
+                                lancamentos={this.state.lancamentos} 
+                                alterarStatus={this.aoAlterarStatus}
+                                deletarAction={this.abrirConfirmacao}
+                                editarAction={this.editar}
+                            /> 
+                            <AlertDialogSlide 
+                                open={this.state.showConfirmDialog} 
+                                lancamentoInfo={this.state.lancamentoDeletar}
+                                deletarAction={this.deletar} 
+                                cancelarAction={this.cancelarDelecao} />   
 
-                <AlertDialogInformation 
-                    open={this.state.showInfoDialog} 
-                    close={this.fecharAlertaAviso} 
-                    mensagemCustomizada={this.state.mensagemAlerta} 
-                />             
+                            <AlertDialogInformation 
+                                open={this.state.showInfoDialog} 
+                                close={this.fecharAlertaAviso} 
+                                mensagemCustomizada={this.state.mensagemAlerta} 
+                            />             
 
-                <AlertLoading open={this.state.showLoadingDialog} />
-            </React.Fragment>
+                            <AlertLoading open={this.state.showLoadingDialog} />
+                        </div>
+                    </div>
+                    <Footer/>
+                </div>
+            </div> 
         )
     }
 }

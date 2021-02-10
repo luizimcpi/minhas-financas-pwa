@@ -1,105 +1,77 @@
 import { React, useState } from 'react';
 
-import Button from '@material-ui/core/Button';
-import Card from '@material-ui/core/Card';
-import CardActions from '@material-ui/core/CardActions';
-import CardContent from '@material-ui/core/CardContent';
-import { FormControl } from '@material-ui/core';
-import Grid from '@material-ui/core/Grid';
-import TextField from '@material-ui/core/TextField';
-import Typography from '@material-ui/core/Typography';
-import { makeStyles } from '@material-ui/core/styles';
-
-const useStyles = makeStyles((theme) => ({
-  root: {
-    flexGrow: 1,
-  },
-  paper: {
-    padding: theme.spacing(1),
-    textAlign: 'center',
-    color: theme.palette.text.secondary,
-  },
-  formControlTextField: {
-    width: '30ch',
-  },
-  cardAction: {
-    justifyContent: "center",
-  },
-  cardContent: {
-    textAlign: "center", 
-    justifyContent: "center",
-    marginTop: 80,
-  },
-}));
+import moneyImg from '../../money-free.jpg'
 
 export default function LoginForm({entrar, usuarios}) {
 
-  const classes = useStyles();
   const [email, setEmail] = useState("")
   const [senha, setSenha] = useState("")
   
-
   return (
-    <div className={classes.root}>
-     <form onSubmit={
-                (event) => {
-                    event.preventDefault();
-                    entrar({email, senha});
-                }
-            }>
-      <Grid container spacing={3}>
-        <Grid item xs={12}>
-            <Card className={classes.root}>
-                <CardContent className={classes.cardContent}>
-                      <Typography variant="h3" gutterBottom>
-                        Login
-                      </Typography>
-                      <FormControl className={classes.formControlTextField}>
-                        <TextField id="outlined-full-width" label="Email" fullWidth
-                            margin="normal"
-                            InputLabelProps={{
-                                shrink: true,
-                            }}
-                            variant="outlined"
-                            value={email}
-                            onChange={
-                                event => {
-                                    setEmail(event.target.value);
+
+      <div className="container">
+        <div className="row justify-content-center">
+
+          <div className="col-xl-10 col-lg-12 col-md-9">
+
+            <div className="card o-hidden border-0 shadow-lg my-5">
+              <div className="card-body p-0">
+                <div className="row">
+                  <div className="col-lg-6">
+                    <img className="img-login"  alt="" src={moneyImg}/>
+                  </div>
+                  <div className="col-lg-6">
+                    <div className="p-5">
+                      <div className="text-center">
+                        <h1 className="h4 text-gray-900 mb-4">SISO - Sistema Orçamentário</h1>
+                      </div>
+                      <form className="user" onSubmit={
+                      (event) => {
+                          event.preventDefault();
+                          entrar({email, senha});
+                      }
+                  }>
+                        <div className="form-group">
+                          <input type="email" className="form-control form-control-user" 
+                                  id="exampleInputEmail" 
+                                  aria-describedby="emailHelp" 
+                                  placeholder="Email..."
+                                  value={email}
+                                  onChange={
+                                      event => {
+                                          setEmail(event.target.value);
+                                      }
+                                  }
+                              required/>
+                        </div>
+                        <div className="form-group">
+                          <input type="password" 
+                            className="form-control form-control-user" 
+                            id="exampleInputPassword" 
+                            placeholder="Senha"
+                            value={senha}
+                                onChange={
+                                    event => {
+                                        setSenha(event.target.value);
+                                    }
                                 }
-                            }
-                        />
-                    </FormControl> <br />
-                    <FormControl className={classes.formControlTextField}>
-                    <TextField
-                        id="outlined-password-input"
-                        label="Senha"
-                        type="password"
-                        autoComplete="current-password"
-                        fullWidth
-                        margin="normal"
-                        InputLabelProps={{
-                            shrink: true,
-                        }}
-                        variant="outlined"
-                        value={senha}
-                        onChange={
-                            event => {
-                                setSenha(event.target.value);
-                            }
-                        }
-                    />
-                  </FormControl>
-                </CardContent>
-                <CardActions className={classes.cardAction}>
-                  <Button type="submit" variant="contained" color="primary">
-                    Entrar
-                  </Button>
-                  <Button variant="outlined" color="secondary" onClick={usuarios}>Cadastro</Button>
-                </CardActions>
-            </Card>
-        </Grid>
-    </Grid>
-      </form>
-    </div>
+                          required/>
+                        </div>
+                        <button type="submit" className="btn btn-primary btn-user btn-block">Login</button>
+                        <hr/>
+                        <button type="button" className="btn btn-warning btn-user btn-block" onClick={usuarios}>Cadastre-se</button>
+                      </form>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+
   );
 }

@@ -1,42 +1,28 @@
-import Button from '@material-ui/core/Button';
-import Dialog from '@material-ui/core/Dialog';
-import DialogActions from '@material-ui/core/DialogActions';
-import DialogContent from '@material-ui/core/DialogContent';
-import DialogContentText from '@material-ui/core/DialogContentText';
-import DialogTitle from '@material-ui/core/DialogTitle';
 import React from 'react';
-import Slide from '@material-ui/core/Slide';
-
-const Transition = React.forwardRef(function Transition(props, ref) {
-  return <Slide direction="up" ref={ref} {...props} />;
-});
 
 const AlertDialogSlide = (props) => {
 
   return (
-    <div>
-      <Dialog
-          open={props.open}
-          TransitionComponent={Transition}
-          keepMounted
-          aria-labelledby="alert-dialog-slide-title"
-          aria-describedby="alert-dialog-slide-description"
-      >
-          <DialogTitle id="alert-dialog-slide-title">{"Exclusão de Lançamento"}</DialogTitle>
-          <DialogContent>
-          <DialogContentText id="alert-dialog-slide-description">
-              Deseja mesmo excluir o lançamento: {props.lancamentoInfo.descricao} ?
-          </DialogContentText>
-          </DialogContent>
-          <DialogActions>
-          <Button onClick={props.deletarAction} color="secondary">
-              Sim
-          </Button>
-          <Button onClick={props.cancelarAction} color="primary">
-              Não
-          </Button>
-          </DialogActions>
-        </Dialog>
+    <div className="modal fade show" 
+         id="infoModal" 
+         tabIndex="-1" 
+         aria-labelledby="exampleModalLabel" 
+         aria-modal="true" role="dialog"
+         style={{ display: props.open ? 'block': 'none'}}>
+    <div className="modal-dialog" role="document">
+      <div className="modal-content">
+          <div className="modal-header">
+              <h5 className="modal-title" id="exampleModalLabel">Exclusão de Lançamento...</h5>
+          </div>
+          <div className="modal-body">
+            Deseja mesmo excluir o lançamento: {props.lancamentoInfo.descricao} ?
+          </div>
+          <div className="modal-footer">
+            <button className="btn btn-primary" onClick={props.deletarAction} type="button" data-dismiss="modal">Sim</button>
+            <button className="btn btn-danger" onClick={props.cancelarAction} type="button" data-dismiss="modal">Cancelar</button>
+          </div>
+      </div>
+    </div>
     </div>
   );
 }

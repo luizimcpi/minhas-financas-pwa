@@ -21,6 +21,10 @@ class CadastroUsuario extends React.Component {
         this.setState({showInfoDialog: false, mensagemAlerta: ''})
     }
 
+    goHome= () => {
+        this.props.history.push('/home')
+    } 
+
     aoCadastrarForm = (dados) => { 
         const { nome, email, senha, senhaRepeticao }  = dados
         const usuario = { nome, email, senha, senhaRepeticao }
@@ -40,14 +44,14 @@ class CadastroUsuario extends React.Component {
             this.setState({showLoadingDialog: false, showInfoDialog: true, mensagemAlerta: 'Usuário cadastrado com sucesso!'})
             this.props.history.push('/home')
         }).catch(error => {
-            this.setState({showLoadingDialog: false, showInfoDialog: true, mensagemAlerta: error.response.data})
+            this.setState({showLoadingDialog: false, showInfoDialog: true, mensagemAlerta: error.response.data.message})
         })
     }
 
     render(){
         return(
             <React.Fragment>
-                <UsuarioForm cadastrar={this.aoCadastrarForm}/>
+                <UsuarioForm cadastrar={this.aoCadastrarForm} voltar={this.goHome}/>
                 <AlertDialogInformation 
                         open={this.state.showInfoDialog} 
                         close={this.fecharAlertaAviso} 
