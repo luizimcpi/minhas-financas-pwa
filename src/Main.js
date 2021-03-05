@@ -3,19 +3,29 @@ import 'startbootstrap-sb-admin-2/vendor/fontawesome-free/css/all.min.css'
 import 'startbootstrap-sb-admin-2/vendor/bootstrap/js/bootstrap.bundle.min.js'
 import './custom.css'
 
+import { App, Block, Page, Panel, View } from 'framework7-react';
+
 import ProvedorAutenticacao from './provedorAutenticacao'
 import React from 'react';
 import Rotas from './rotas'
 
-function App() {
+const f7params = {
+  id: "io.framework7.testapp", // App bundle ID
+  name: "Framework7", // App name
+  theme: "auto", // Automatic theme detection
+  // App routes
+  routes: []
+};
+
+function Main() {
   
   return (
-    <React.Fragment>
+    <App {...f7params}>
       <ProvedorAutenticacao>
         <Rotas />
       </ProvedorAutenticacao>
-    </React.Fragment>
+    </App>
   );
 }
 
-export default App;
+export default Main;
