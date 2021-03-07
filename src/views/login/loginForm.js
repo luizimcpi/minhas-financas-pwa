@@ -1,54 +1,53 @@
 import {
   BlockFooter,
   List,
-  ListButton,
   ListInput,
   LoginScreenTitle,
-  Page,
-  f7,
+  Page
 } from 'framework7-react';
 import { React, useState } from 'react';
-
-import moneyImg from '../../money-free.jpg'
 
 export default function LoginForm({entrar, usuarios}) {
 
   const [email, setEmail] = useState("")
   const [senha, setSenha] = useState("")
+  const signIn = () => {
+      entrar({email, senha})
+  };
   
   return (
 
        <Page noToolbar noNavbar noSwipeback loginScreen>
-        <LoginScreenTitle>Framework7</LoginScreenTitle>
+        <LoginScreenTitle>SISO</LoginScreenTitle>
         <List form>
-          <ListInput
-            label="Username"
-            type="text"
-            placeholder="Your username"
-            value={email}
-            onInput={(e) => {
-              setEmail(e.target.value);
-            }}
-          />
-          <ListInput
-            label="Password"
-            type="password"
-            placeholder="Your password"
-            value={senha}
-            onInput={(e) => {
-              setSenha(e.target.value);
-            }}
-          />
+            <ListInput
+              label="E-mail"
+              type="text"
+              placeholder="Seu e-mail"
+              value={email}
+              onInput={(e) => {
+                setEmail(e.target.value);
+              }}
+            />
+            <ListInput
+              label="Senha"
+              type="password"
+              placeholder="Sua senha"
+              value={senha}
+              onInput={(e) => {
+                setSenha(e.target.value);
+              }}
+            />
+          <button onClick={signIn} class="col button button-raised">Entrar</button>
+          <br/>
+          <button onClick={usuarios} class="col button button-raised button-fill">Cadastrar</button>
         </List>
         <List>
-          <ListButton onClick={usuarios}>Sign In</ListButton>
           <BlockFooter>
-            Some text about login information.
-            <br />
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+           Todos os direitos reservados. 2021
           </BlockFooter>
         </List>
-          </Page>
+      </Page>
 
   );
 }

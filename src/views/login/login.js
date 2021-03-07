@@ -6,6 +6,7 @@ import React from 'react';
 import UsuarioService from '../../app/service/usuarioService'
 import httpStatus from 'http-status'
 import { withRouter } from 'react-router-dom'
+import { f7 } from 'framework7-react';
 
 class Login extends React.Component {
 
@@ -23,12 +24,12 @@ class Login extends React.Component {
     aoEntrarForm = (dados) => { 
        
         if(!dados.email){
-            this.setState({showInfoDialog: true, mensagemAlerta: 'Favor preencher o campo Email...'})
+            f7.dialog.alert('Favor preencher o campo e-mail...', () => {});
             return false
         }
 
         if(!dados.senha){
-            this.setState({showInfoDialog: true, mensagemAlerta: 'Favor preencher o campo Senha...'})
+            f7.dialog.alert('Favor preencher o campo senha...', () => {});
             return false
         }
 

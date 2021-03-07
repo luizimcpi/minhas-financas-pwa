@@ -11,7 +11,7 @@ import Rotas from './rotas'
 
 const f7params = {
   id: "io.framework7.testapp", // App bundle ID
-  name: "Framework7", // App name
+  name: "SISO", // App name
   theme: "auto", // Automatic theme detection
   // App routes
   routes: []
