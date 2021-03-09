@@ -13,12 +13,12 @@ export default function LoginForm({entrar, usuarios}) {
   const [senha, setSenha] = useState("")
   const signIn = () => {
       entrar({email, senha})
-  };
+  }
   
   return (
 
        <Page noToolbar noNavbar noSwipeback loginScreen>
-        <LoginScreenTitle>SISO</LoginScreenTitle>
+        <LoginScreenTitle>Login</LoginScreenTitle>
         <List form>
             <ListInput
               label="E-mail"
