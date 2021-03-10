@@ -132,6 +132,10 @@ class ConsultaLancamentos extends React.Component{
         this.props.history.push('/login')
     }
 
+    goHome = () => {
+        this.props.history.push('/home')
+    }
+
     render(){
 
         const meses = this.service.obterListaMeses()
@@ -185,6 +189,9 @@ class ConsultaLancamentos extends React.Component{
                     <FabButtons position="top">
                         <FabButton onClick={this.aoSair} label="Sair" color="red"> 
                             <Icon ios="f7:nosign" aurora="f7:nosign" md="f7:nosign"></Icon>
+                        </FabButton>
+                        <FabButton onClick={this.goHome} label="Home" color="blue"> 
+                            <Icon ios="f7:house" aurora="f7:house" md="f7:house"></Icon>
                         </FabButton>
                     </FabButtons>
                 </Fab>
