@@ -1,15 +1,15 @@
-import React from 'react'
-import currencyFormatter from 'currency-formatter'
-
 import {
-  Page,
-  Navbar,
   Card,
   Fab,
+  FabButton,
   FabButtons,
   Icon,
-  FabButton
-} from 'framework7-react';
+  Navbar,
+  Page
+} from 'framework7-react'
+
+import React from 'react'
+import currencyFormatter from 'currency-formatter'
 
 export default function HomeCard({data, consultar, deslogar}) {
   const saldoAtual = data.saldo
