@@ -42,7 +42,7 @@ export default function ConsultaLancamentoForm({meses, tipos, buscar, cadastrar}
             <ListInput
               label="Mes"
               type="select"
-              defaultValue=""
+              
               placeholder="Escolha o mês..."
               value={mes}
               onChange={

@@ -1,10 +1,11 @@
+import { Progressbar, f7 } from 'framework7-react'
+
 import { AuthContext } from '../../provedorAutenticacao'
 import LoginForm from './loginForm';
 import React from 'react';
 import UsuarioService from '../../app/service/usuarioService'
 import httpStatus from 'http-status'
 import { withRouter } from 'react-router-dom'
-import { Progressbar, f7 } from 'framework7-react'
 
 class Login extends React.Component {
 
@@ -30,12 +31,14 @@ class Login extends React.Component {
         }
         
         this.setState({showLoadingDialog: true})
+        const preloader = f7.dialog.preloader('Carregando...', 'blue')
 
         this.service.autenticar({
             email: dados.email,
             senha: dados.senha
         }).then( response => {
             f7.progressbar.hide()
+            preloader.close()
             this.context.iniciarSessao(response.data) 
             this.props.history.push('/home')
         }).catch( erro => {

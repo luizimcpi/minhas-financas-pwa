@@ -1,7 +1,6 @@
 import {
 List,
 ListItem,
-Page
 } from 'framework7-react'
 
 import React from 'react';
@@ -19,7 +18,8 @@ const LancamentosTable = (props) => {
         after={lancamento.mes}
         subtitle={currencyFormatter.format(lancamento.valor, {locale: 'pt-BR'})}
         text={lancamento.status === 'EFETIVADO' ? 'PAGO' : lancamento.status}
-      ></ListItem>
+      >
+      </ListItem>
     )
   })
 
