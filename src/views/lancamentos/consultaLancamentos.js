@@ -108,25 +108,23 @@ class ConsultaLancamentos extends React.Component{
         })
     }
 
-    abrirConfirmacao = (lancamento) => {
-        f7.dialog.confirm('Deseja realmente excluir o lançamento?', 'Deleção de Lançamento', this.deletar(), this.cancelarDelecao())
-        this.setState({lancamentoDeletar: lancamento})
+     abrirConfirmacao = (lancamento) => {
+        const msg = `Deseja realmente excluir o lançamento ${lancamento.descricao}?`
+        f7.dialog.confirm(msg, function () {
+            this.deletar(lancamento)
+        });
     }
 
-    cancelarDelecao = () => {
-        this.setState({lancamentoDeletar: {}})
-    }
-
-    deletar = () => {
+    deletar = (lancamento) => {
         const usuarioLogado = this.context.usuarioAutenticado
         
         this.setState({showLoadingDialog: true})
         const preloader = f7.dialog.preloader('Carregando...', 'blue')
 
-        this.service.deletar(this.state.lancamentoDeletar.id, usuarioLogado)
+        this.service.deletar(lancamento.id, usuarioLogado)
         .then(response => {
             const lancamentos = this.state.lancamentos
-            const index = lancamentos.indexOf(this.state.lancamentoDeletar)
+            const index = lancamentos.indexOf(lancamento)
             lancamentos.splice(index, 1);
             f7.dialog.alert('Lançamento excluído com sucesso!', () => {})
             this.setState({lancamentos: lancamentos, showLoadingDialog: false})
