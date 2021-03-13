@@ -38,9 +38,9 @@ export default function LoginForm({entrar, usuarios}) {
                 setSenha(e.target.value);
               }}
             />
-          <button onClick={signIn} class="col button button-raised">Entrar</button>
+          <button onClick={signIn} className="col button button-raised">Entrar</button>
           <br/>
-          <button onClick={usuarios} class="col button button-raised button-fill">Cadastrar</button>
+          <button onClick={usuarios} className="col button button-raised button-fill">Cadastrar</button>
         </List>
         <List>
           <BlockFooter>

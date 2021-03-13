@@ -6,8 +6,7 @@ import {
  Navbar,
  Page,
  Progressbar,
- f7,
-
+ f7
 } from 'framework7-react'
 
 import { AuthContext } from '../../provedorAutenticacao'

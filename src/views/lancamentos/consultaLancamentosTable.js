@@ -49,6 +49,7 @@ const LancamentosTable = (props) => {
     return (
      
       <ListItem
+        key={lancamento.id}
         title={lancamento.descricao}
         after={getNameOfMonth(lancamento.mes)}
         subtitle={currencyFormatter.format(lancamento.valor, {locale: 'pt-BR'})}

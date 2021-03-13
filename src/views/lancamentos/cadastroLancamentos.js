@@ -1,20 +1,18 @@
-import AlertDialogInformation from '../../components/alertDialogInformation'
-import AlertLoading from '../../components/alertLoading'
 import { AuthContext } from '../../provedorAutenticacao'
 import CadastroLancamentosForm from './cadastroLancamentosForm'
-import Footer from '../../components/footer'
 import LancamentoService from '../../app/service/lancamentoService'
-import Navbar from '../../components/navbar'
 import React from 'react'
-import Sidebar from '../../components/sidebar'
 import { withRouter } from 'react-router-dom'
+import {
+    Page,
+    Progressbar,
+    f7
+} from 'framework7-react'
 
 class CadastroLancamentos extends React.Component {
 
     state = {
         showLoadingDialog: false,
-        mensagemAlerta: '',
-        showInfoDialog: false,
         lancamentoAtualizar: {
             id: null,
             descricao: '',
@@ -38,10 +36,12 @@ class CadastroLancamentos extends React.Component {
         if(params.id && usuarioLogado){
             
             this.setState({showLoadingDialog: true})
+            const preloader = f7.dialog.preloader('Carregando...', 'blue')
             
             this.lancamentoService
             .obterPorId(params.id, usuarioLogado)
             .then(response => {
+                preloader.close()
                 this.setState({ lancamentoAtualizar: { 
                     id: response.data.id,
                     descricao: response.data.descricao,
@@ -53,13 +53,11 @@ class CadastroLancamentos extends React.Component {
                     atualizando: true,
                 } , showLoadingDialog: false })
             }).catch(error => {
-                this.setState({showLoadingDialog: false, showInfoDialog: true, mensagemAlerta: error.response.data})
+                preloader.close()
+                f7.dialog.alert(error.response.data, () => {})
+                this.setState({showLoadingDialog: false})
             })
         }
-    }
-
-    fecharAlertaAviso = () => {
-        this.setState({showInfoDialog: false, mensagemAlerta: ''})
     }
     
     submit = (dados) => {
@@ -73,19 +71,24 @@ class CadastroLancamentos extends React.Component {
             this.lancamentoService.validar(lancamento)
         }catch(erro){
             const mensagens = erro.mensagens
-            mensagens.forEach(msg => this.setState({showInfoDialog: true, mensagemAlerta: msg}))
+            mensagens.forEach(msg =>  f7.dialog.alert(msg, () => {}))
             return false
         }
 
         this.setState({showLoadingDialog: true})
+        const preloader = f7.dialog.preloader('Carregando...', 'blue')
 
         this.lancamentoService
         .salvar(lancamento, usuarioLogado)
         .then( response => {
-            this.setState({showLoadingDialog: false, showInfoDialog: true, mensagemAlerta: 'Lançamento cadastrado com sucesso!'})
+            preloader.close()
+            f7.dialog.alert('Lançamento cadastrado com sucesso!', () => {})
+            this.setState({showLoadingDialog: false})
             this.props.history.push('/consulta-lancamentos')
         }).catch(error => {
-            this.setState({showLoadingDialog: false, showInfoDialog: true, mensagemAlerta: error.response.data})
+            preloader.close()
+            f7.dialog.alert(error.response.data, () => {})
+            this.setState({showLoadingDialog: false})
         })
     } 
 
@@ -96,14 +99,19 @@ class CadastroLancamentos extends React.Component {
         const lancamento = { descricao, valor, mes, ano, tipo, status, id }
 
         this.setState({showLoadingDialog: true})
+        const preloader = f7.dialog.preloader('Carregando...', 'blue')
 
         this.lancamentoService
         .atualizar(lancamento, usuarioLogado)
         .then( response => {
-            this.setState({showLoadingDialog: false, showInfoDialog: true, mensagemAlerta: 'Lançamento atualizado com sucesso!'})
+            preloader.close()
+            f7.dialog.alert('Lançamento atualizado com sucesso!', () => {})
+            this.setState({showLoadingDialog: false})
             this.props.history.push('/consulta-lancamentos')
         }).catch(error => {
-            this.setState({showLoadingDialog: false, showInfoDialog: true, mensagemAlerta: error.response.data})
+            preloader.close()
+            f7.dialog.alert( error.response.data, () => {})
+            this.setState({showLoadingDialog: false})
         })
     }
 
@@ -122,31 +130,17 @@ class CadastroLancamentos extends React.Component {
         const meses = this.lancamentoService.obterListaMeses()
 
         return (
-            <div id="wrapper">
-                <Sidebar/>
-                <div id="content-wrapper" className="d-flex flex-column">
-                    <Navbar nomeUsuario={this.context.usuarioAutenticado.nome} deslogar={this.aoSair}/>
-                    <div id="content">
-                        <div className="container-fluid">
-                            <CadastroLancamentosForm 
-                                meses={meses} 
-                                tipos={tipos} 
-                                cancelar={this.cancelar} 
-                                cadastrar={this.submit} 
-                                atualizar={this.atualizar} 
-                                lancamentoAtualizar={this.state.lancamentoAtualizar}
-                                />
-                            <AlertDialogInformation 
-                                    open={this.state.showInfoDialog} 
-                                    close={this.fecharAlertaAviso} 
-                                    mensagemCustomizada={this.state.mensagemAlerta} 
-                                />  
-                            <AlertLoading open={this.state.showLoadingDialog} />
-                        </div>
-                    </div>
-                    <Footer/>
-                </div>
-            </div>
+            <Page>
+                <Progressbar infinite color="blue" style={{ display: this.state.showLoadingDialog ? 'block': 'none'}} />
+                <CadastroLancamentosForm 
+                    meses={meses} 
+                    tipos={tipos} 
+                    cancelar={this.cancelar} 
+                    cadastrar={this.submit} 
+                    atualizar={this.atualizar} 
+                    lancamentoAtualizar={this.state.lancamentoAtualizar}
+                />
+            </Page>
         )
     }
 }

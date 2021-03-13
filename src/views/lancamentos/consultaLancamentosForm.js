@@ -1,6 +1,5 @@
 import {
 CardContent,
-Icon,
 List,
 ListInput,
 LoginScreenTitle,
@@ -51,12 +50,11 @@ export default function ConsultaLancamentoForm({meses, tipos, buscar, cadastrar}
                       setMes(event.target.value);
                   }
               }>
-              <Icon icon="demo-list-icon" slot="media"/>
               {optionsMeses}
             </ListInput>
             <ListInput
               label="Descrição"
-              type="password"
+              type="text"
               placeholder="Descrição"
               value={descricao}
               onInput={(e) => {
@@ -74,12 +72,11 @@ export default function ConsultaLancamentoForm({meses, tipos, buscar, cadastrar}
                       }
                   }
              >
-              <Icon icon="demo-list-icon" slot="media"/>
               {optionsTipos}
             </ListInput>
-          <button onClick={search} class="col button button-raised">Buscar</button>
+          <button onClick={search} className="col button button-raised">Buscar</button>
           <br/>
-          <button onClick={cadastrar} class="col button button-raised button-fill">Cadastrar</button>
+          <button onClick={cadastrar} className="col button button-raised button-fill">Cadastrar</button>
         </List>
       </CardContent>
     </Card>
