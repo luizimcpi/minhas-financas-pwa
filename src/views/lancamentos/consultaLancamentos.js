@@ -37,6 +37,11 @@ class ConsultaLancamentos extends React.Component{
             f7.dialog.alert('O preenchimento do campo Ano é obrigatório.', () => {})
             return false
         }
+
+        if(!dados.mes){
+            f7.dialog.alert('O preenchimento do campo Mês é obrigatório.', () => {})
+            return false
+        }
         
         const usuarioLogado = this.context.usuarioAutenticado
         
@@ -154,7 +159,7 @@ class ConsultaLancamentos extends React.Component{
         return (
             <Page>
                 <Progressbar infinite color="blue" style={{ display: this.state.showLoadingDialog ? 'block': 'none'}} />
-                <Navbar title="SISO"></Navbar>
+                <Navbar title="CONFIN"></Navbar>
 
                 <ConsultaLancamentosForm meses={meses} tipos={tipos} buscar={this.aoBuscarForm} cadastrar={this.aoCadastrarForm}/>               
 

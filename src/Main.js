@@ -9,8 +9,8 @@ import React from 'react';
 import Rotas from './rotas'
 
 const f7params = {
-  id: "com.devlhse.siso", // App bundle ID
-  name: "SISO", // App name
+  id: "com.devlhse.confin", // App bundle ID
+  name: "CONFIN", // App name
   theme: "auto", // Automatic theme detection
   // App routes
   routes: []
