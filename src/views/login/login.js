@@ -1,4 +1,4 @@
-import { Progressbar, f7 } from 'framework7-react'
+import { Page, Progressbar, f7 } from 'framework7-react'
 
 import { AuthContext } from '../../provedorAutenticacao'
 import LoginForm from './loginForm';
@@ -42,9 +42,11 @@ class Login extends React.Component {
             this.props.history.push('/home')
         }).catch( erro => {
             if(erro.response.status === httpStatus.FORBIDDEN) {
+                preloader.close()
                 this.setState({showLoadingDialog: false})
                 f7.dialog.alert('Nome de usuário / senha inválido(s), tente novamente ou mais tarde...', () => {})
             } else {
+                preloader.close()
                 this.setState({showLoadingDialog: false})
                 f7.dialog.alert('Ocorreu um erro inesperado... Entre em contato com o Administrador.', () => {})
             }
@@ -57,10 +59,10 @@ class Login extends React.Component {
 
     render(){
         return(
-            <React.Fragment>
+           <Page>
                 <Progressbar infinite color="blue" style={{ display: this.state.showLoadingDialog ? 'block': 'none'}} />
                 <LoginForm entrar={this.aoEntrarForm} usuarios={this.toUsuarios}/>
-            </React.Fragment>
+            </Page>
         )
     }
 
