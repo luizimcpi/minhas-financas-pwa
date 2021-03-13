@@ -109,9 +109,20 @@ class ConsultaLancamentos extends React.Component{
 
      abrirConfirmacao = (lancamento) => {
         const msg = `Deseja realmente excluir o lançamento ${lancamento.descricao}?`
-        f7.dialog.confirm(msg, function () {
-            this.deletar(lancamento)
-        });
+        f7.dialog.create({
+            title: 'Exclusão de Lançamento',
+            text: msg,
+            buttons: [
+              {
+                text: 'Sim',
+                onClick: () => this.deletar(lancamento)
+              },
+              {
+                text: 'Não',
+              },
+            ],
+            verticalButtons: false,
+          }).open()
     }
 
     deletar = (lancamento) => {
