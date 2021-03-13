@@ -1,9 +1,10 @@
 import {
+CardContent,
 Icon,
 List,
 ListInput,
 LoginScreenTitle,
-Page
+Card
 } from 'framework7-react'
 import { React, useState } from 'react';
 
@@ -27,7 +28,8 @@ export default function ConsultaLancamentoForm({meses, tipos, buscar, cadastrar}
 
   return (
 
-    <Page noToolbar noNavbar noSwipeback loginScreen>
+    <Card>
+      <CardContent>
         <LoginScreenTitle>Consulta - Lançamentos</LoginScreenTitle>
         <List form>
             <ListInput
@@ -41,8 +43,7 @@ export default function ConsultaLancamentoForm({meses, tipos, buscar, cadastrar}
             />
             <ListInput
               label="Mes"
-              type="select"
-              
+              type="select"  
               placeholder="Escolha o mês..."
               value={mes}
               onChange={
@@ -65,7 +66,6 @@ export default function ConsultaLancamentoForm({meses, tipos, buscar, cadastrar}
             <ListInput
               label="Tipo"
               type="select"
-              defaultValue=""
               placeholder="Escolha um tipo..."
               value={tipo}
               onChange={
@@ -81,6 +81,7 @@ export default function ConsultaLancamentoForm({meses, tipos, buscar, cadastrar}
           <br/>
           <button onClick={cadastrar} class="col button button-raised button-fill">Cadastrar</button>
         </List>
-      </Page>
+      </CardContent>
+    </Card>
   );
 }

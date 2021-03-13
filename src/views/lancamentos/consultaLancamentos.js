@@ -3,13 +3,11 @@ import {
  FabButton,
  FabButtons,
  Icon,
- Link,
- NavRight,
  Navbar,
  Page,
- Popup,
  Progressbar,
- f7
+ f7,
+
 } from 'framework7-react'
 
 import { AuthContext } from '../../provedorAutenticacao'
@@ -158,25 +156,14 @@ class ConsultaLancamentos extends React.Component{
                 <Progressbar infinite color="blue" style={{ display: this.state.showLoadingDialog ? 'block': 'none'}} />
                 <Navbar title="SISO"></Navbar>
 
-                <Popup className="demo-popup-swipe" style={{ display: this.state.showTableDialog ? 'block': 'none'}} swipeToClose>
-                    <Page>
-                        <Navbar title="Lançamentos">
-                            <NavRight>
-                            <Link popupClose onClick={this.fecharTabela}>Fechar</Link>
-                            </NavRight>
-                        </Navbar>
-                        <LancamentosTable 
-                            lancamentos={this.state.lancamentos} 
-                            alterarStatus={this.aoAlterarStatus}
-                            deletarAction={this.abrirConfirmacao}
-                            editarAction={this.editar}
-                        /> 
-                    </Page>
-                </Popup>
-               
-               
-                <ConsultaLancamentosForm meses={meses} tipos={tipos} buscar={this.aoBuscarForm} cadastrar={this.aoCadastrarForm}/>   
-              
+                <ConsultaLancamentosForm meses={meses} tipos={tipos} buscar={this.aoBuscarForm} cadastrar={this.aoCadastrarForm}/>               
+
+                <LancamentosTable 
+                    lancamentos={this.state.lancamentos} 
+                    alterarStatus={this.aoAlterarStatus}
+                    deletarAction={this.abrirConfirmacao}
+                    editarAction={this.editar}
+                />    
 
                 <Fab position="right-bottom" slot="fixed" color="blue">
                     <Icon ios="f7:plus" aurora="f7:plus" md="f7:plus"></Icon>

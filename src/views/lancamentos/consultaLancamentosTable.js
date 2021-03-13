@@ -1,6 +1,8 @@
 import {
+CardContent,
 List,
 ListItem,
+Card
 } from 'framework7-react'
 
 import React from 'react';
@@ -24,11 +26,13 @@ const LancamentosTable = (props) => {
   })
 
   return (
-    <React.Fragment>
-      <List mediaList>
-        {rows}
-      </List>
-     </React.Fragment>
+    <Card>
+      <CardContent>
+        <List mediaList>
+          {rows}
+        </List>
+      </CardContent>
+    </Card>
   )
 }
 
