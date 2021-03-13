@@ -37,7 +37,6 @@ class Login extends React.Component {
             email: dados.email,
             senha: dados.senha
         }).then( response => {
-            f7.progressbar.hide()
             preloader.close()
             this.context.iniciarSessao(response.data) 
             this.props.history.push('/home')

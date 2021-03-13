@@ -33,13 +33,16 @@ class CadastroUsuario extends React.Component {
         }
 
         this.setState({showLoadingDialog: true})
+        const preloader = f7.dialog.preloader('Carregando...', 'blue')
 
         this.service.salvar(usuario)
         .then(response => {
+            preloader.close()
             this.setState({showLoadingDialog: false})
             f7.dialog.alert('Usuário cadastrado com sucesso!', () => {})
             this.props.history.push('/home')
         }).catch(error => {
+            preloader.close()
             this.setState({showLoadingDialog: false})
             f7.dialog.alert(error.response.data.message, () => {})
         })
