@@ -1,10 +1,26 @@
+import {
+Card,
+CardContent,
+List,
+ListInput,
+LoginScreenTitle
+} from 'framework7-react'
 import { React, useState } from 'react';
 
+import moment from 'moment'
+
 export default function ConsultaLancamentoForm({meses, tipos, buscar, cadastrar}) {
-  const [ano, setAno] = useState("")
-  const [mes, setMes] = useState("")
+  const anoAtual = moment().format('YYYY')
+  const mesAtual = moment().format('M')
+
+  const [ano, setAno] = useState(anoAtual)
+  const [mes, setMes] = useState(mesAtual)
   const [tipo, setTipo] = useState("")
   const [descricao, setDescricao] = useState("")
+
+  const search = () => {
+    buscar({ano, mes, tipo, descricao})
+  }
 
   const optionsMeses = meses.map((option, index) =>
     <option key={index} value={option.value}>{option.label}</option>
@@ -15,89 +31,59 @@ export default function ConsultaLancamentoForm({meses, tipos, buscar, cadastrar}
   );
 
   return (
-  <div className="container">
-    <div className="row justify-content-center">
 
-      <div className="col-xl-10 col-lg-12 col-md-9">
-
-        <div className="card o-hidden border-0 shadow-lg my-5">
-          <div className="card-body p-0">
-            <div className="row">
-              <div className="col-lg-12">
-                <div className="p-5">
-                  <div className="text-center">
-                    <h1 className="h4 text-gray-900 mb-4">Consulta Lançamentos</h1>
-                  </div>
-                  <form className="user" onSubmit={
-                      (event) => {
-                          event.preventDefault();
-                          buscar({ano, mes, tipo, descricao});
+    <Card>
+      <CardContent>
+        <LoginScreenTitle>Consulta - Lançamentos</LoginScreenTitle>
+        <List form>
+            <ListInput
+              label="Ano"
+              type="text"
+              placeholder="Ano"
+              value={ano}
+              onInput={(e) => {
+                setAno(e.target.value);
+              }}
+            />
+            <ListInput
+              label="Mes"
+              type="select"  
+              placeholder="Escolha o mês..."
+              value={mes}
+              onChange={
+                  event => {
+                      setMes(event.target.value);
+                  }
+              }>
+              {optionsMeses}
+            </ListInput>
+            <ListInput
+              label="Descrição"
+              type="text"
+              placeholder="Descrição"
+              value={descricao}
+              onInput={(e) => {
+                setDescricao(e.target.value);
+              }}
+            />
+            <ListInput
+              label="Tipo"
+              type="select"
+              placeholder="Escolha um tipo..."
+              value={tipo}
+              onChange={
+                      event => {
+                          setTipo(event.target.value);
                       }
-                  }>
-                    <div className="form-group">
-                      <input type="text" className="form-control" 
-                              id="exampleInputAno" 
-                              aria-describedby="anoHelp" 
-                              placeholder="Ano"
-                              value={ano}
-                              onChange={
-                                  event => {
-                                      setAno(event.target.value);
-                                  }
-                              }
-                          required/>
-                    </div>
-                    <div className="form-group">
-                      <select className="form-control"
-                              aria-label="Select for mes" 
-                              value={mes}
-                              onChange={
-                                      event => {
-                                          setMes(event.target.value);
-                                      }
-                                  }
-                              required>
-                          {optionsMeses}
-                      </select>
-                    </div>
-                    <div className="form-group">
-                      <input type="text" 
-                        className="form-control" 
-                        id="exampleInputDescricao" 
-                        placeholder="Descrição"
-                        value={descricao}
-                        onChange={
-                          event => {
-                              setDescricao(event.target.value);
-                          }
-                        }/>
-                    </div>
-                    <div className="form-group">
-                      <select className="form-control" 
-                              aria-label="Select for tipo" 
-                              value={tipo}
-                              onChange={
-                                      event => {
-                                          setTipo(event.target.value);
-                                      }
-                                  }>
-                          {optionsTipos}
-                      </select>
-                    </div>
-                    <button type="submit" className="btn btn-primary btn-user btn-block">Buscar</button>
-                    <hr/>
-                    <button type="button" className="btn btn-success btn-user btn-block" onClick={cadastrar}>Cadastrar</button>
-                  </form>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-      </div>
-
-    </div>
-
-    </div>
+                  }
+             >
+              {optionsTipos}
+            </ListInput>
+          <button onClick={search} className="col button button-raised">Buscar</button>
+          <br/>
+          <button onClick={cadastrar} className="col button button-raised button-fill">Cadastrar</button>
+        </List>
+      </CardContent>
+    </Card>
   );
 }

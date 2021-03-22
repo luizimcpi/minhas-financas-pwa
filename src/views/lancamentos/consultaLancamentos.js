@@ -1,23 +1,26 @@
-import AlertDialogInformation from '../../components/alertDialogInformation'
-import AlertDialogSlide from './alertDialogSlide'
-import AlertLoading from '../../components/alertLoading'
+import {
+ Fab,
+ FabButton,
+ FabButtons,
+ Icon,
+ Navbar,
+ Page,
+ Progressbar,
+ f7
+} from 'framework7-react'
+
 import { AuthContext } from '../../provedorAutenticacao'
 import ConsultaLancamentosForm from './consultaLancamentosForm'
-import Footer from '../../components/footer'
 import LancamentoService from '../../app/service/lancamentoService'
 import LancamentosTable from './consultaLancamentosTable'
-import Navbar from '../../components/navbar'
 import React from 'react'
-import Sidebar from '../../components/sidebar'
 import { withRouter } from 'react-router-dom'
 
 class ConsultaLancamentos extends React.Component{
 
     state = {
-        mensagemAlerta: '',
-        showInfoDialog: false,
         showLoadingDialog: false,
-        showConfirmDialog: false,
+        showTableDialog: false,
         lancamentoDeletar: {},
         lancamentos: [],
     }
@@ -27,14 +30,15 @@ class ConsultaLancamentos extends React.Component{
         this.service = new LancamentoService();
     }
 
-    fecharAlertaAviso = () => {
-        this.setState({showInfoDialog: false, mensagemAlerta: ''})
-    }
-
     aoBuscarForm = (dados) => {
        
         if(!dados.ano){
-            this.setState({showInfoDialog: true, mensagemAlerta: 'O preenchimento do campo Ano é obrigatório.'})
+            f7.dialog.alert('O preenchimento do campo Ano é obrigatório.', () => {})
+            return false
+        }
+
+        if(!dados.mes){
+            f7.dialog.alert('O preenchimento do campo Mês é obrigatório.', () => {})
             return false
         }
         
@@ -49,16 +53,23 @@ class ConsultaLancamentos extends React.Component{
 
         this.setState({showLoadingDialog: true})
 
+        const preloader = f7.dialog.preloader('Carregando...', 'blue')
+
         this.service
         .consultar(lancamentoFiltro, usuarioLogado)
         .then( response => {
             const lista = response.data
             if(lista.length < 1){
-                this.setState({showLoadingDialog: false, showInfoDialog: true, mensagemAlerta: 'Nenhum resultado encontrado!'})
+                preloader.close()
+                this.setState({showLoadingDialog: false, showTableDialog: false})
+                f7.dialog.alert('Nenhum resultado encontrado!', () => {})
             }
-            this.setState({showLoadingDialog: false, lancamentos: lista })
+            preloader.close()
+            this.setState({showLoadingDialog: false, showTableDialog: true, lancamentos: lista })
         }).catch( error => {
-            this.setState({showLoadingDialog: false, showInfoDialog: true, mensagemAlerta: 'Erro ao consultar lançamentos. Tente novamente ou mais tarde.'})
+            preloader.close()
+            this.setState({showLoadingDialog: false, showTableDialog: false})
+            f7.dialog.alert('Erro ao consultar lançamentos. Tente novamente ou mais tarde.', () => {})
         })
     }
 
@@ -73,6 +84,7 @@ class ConsultaLancamentos extends React.Component{
     aoAlterarStatus = (lancamento, status) => {
         const usuarioLogado = this.context.usuarioAutenticado
         this.setState({showLoadingDialog: true})
+        const preloader = f7.dialog.preloader('Carregando...', 'blue')
 
         this.service
         .alterarStatus(lancamento.id, status, usuarioLogado)
@@ -85,33 +97,52 @@ class ConsultaLancamentos extends React.Component{
                 lancamentos[index] = lancamento
                 this.setState( { lancamentos })
             }
-            this.setState({showLoadingDialog: false, showInfoDialog: true, mensagemAlerta: 'Status atualizado com sucesso!'})
+            this.setState({showLoadingDialog: false})
+            preloader.close()
+            f7.dialog.alert('Status atualizado com sucesso!', () => {})
         }).catch(error => {
-            this.setState({showLoadingDialog: false, showInfoDialog: true, mensagemAlerta: 'Erro ao tentar alterar status do lançamento.'})
+            preloader.close()
+            this.setState({showLoadingDialog: false})
+            f7.dialog.alert('Erro ao tentar alterar status do lançamento.', () => {})
         })
     }
 
-    abrirConfirmacao = (lancamento) => {
-        this.setState({showConfirmDialog: true, lancamentoDeletar: lancamento})
+     abrirConfirmacao = (lancamento) => {
+        const msg = `Deseja realmente excluir o lançamento ${lancamento.descricao}?`
+        f7.dialog.create({
+            title: 'Exclusão de Lançamento',
+            text: msg,
+            buttons: [
+              {
+                text: 'Sim',
+                onClick: () => this.deletar(lancamento)
+              },
+              {
+                text: 'Não',
+              },
+            ],
+            verticalButtons: false,
+          }).open()
     }
 
-    cancelarDelecao = () => {
-        this.setState({showConfirmDialog: false, lancamentoDeletar: {}})
-    }
-
-    deletar = () => {
+    deletar = (lancamento) => {
         const usuarioLogado = this.context.usuarioAutenticado
         
         this.setState({showLoadingDialog: true})
+        const preloader = f7.dialog.preloader('Carregando...', 'blue')
 
-        this.service.deletar(this.state.lancamentoDeletar.id, usuarioLogado)
+        this.service.deletar(lancamento.id, usuarioLogado)
         .then(response => {
             const lancamentos = this.state.lancamentos
-            const index = lancamentos.indexOf(this.state.lancamentoDeletar)
+            const index = lancamentos.indexOf(lancamento)
             lancamentos.splice(index, 1);
-            this.setState({lancamentos: lancamentos, showConfirmDialog: false, showLoadingDialog: false, showInfoDialog: true, mensagemAlerta: 'Lançamento excluído com sucesso!'})
+            f7.dialog.alert('Lançamento excluído com sucesso!', () => {})
+            this.setState({lancamentos: lancamentos, showLoadingDialog: false})
+            preloader.close()
         }).catch( error => {
-            this.setState({showLoadingDialog: false, showInfoDialog: true, mensagemAlerta: 'Ocorreu um erro ao tentar excluir o lançamento.'})
+            preloader.close()
+            this.setState({showLoadingDialog: false})
+            f7.dialog.alert('Ocorreu um erro ao tentar excluir o lançamento.', () => {})
         })
     }
 
@@ -120,43 +151,47 @@ class ConsultaLancamentos extends React.Component{
         this.props.history.push('/login')
     }
 
+    goHome = () => {
+        this.props.history.push('/home')
+    }
+
+    fecharTabela = () => {
+        this.setState({showTableDialog: false})
+    }
+
     render(){
 
         const meses = this.service.obterListaMeses()
         const tipos = this.service.obterListaTipos()    
 
         return (
-            <div id="wrapper">
-                <Sidebar/>
-                <div id="content-wrapper" className="d-flex flex-column">
-                    <Navbar nomeUsuario={this.context.usuarioAutenticado.nome} deslogar={this.aoSair}/>
-                    <div id="content">
-                        <div className="container-fluid">
-                            <ConsultaLancamentosForm meses={meses} tipos={tipos} buscar={this.aoBuscarForm} cadastrar={this.aoCadastrarForm}/>   
-                            <LancamentosTable 
-                                lancamentos={this.state.lancamentos} 
-                                alterarStatus={this.aoAlterarStatus}
-                                deletarAction={this.abrirConfirmacao}
-                                editarAction={this.editar}
-                            /> 
-                            <AlertDialogSlide 
-                                open={this.state.showConfirmDialog} 
-                                lancamentoInfo={this.state.lancamentoDeletar}
-                                deletarAction={this.deletar} 
-                                cancelarAction={this.cancelarDelecao} />   
+            <Page>
+                <Progressbar infinite color="blue" style={{ display: this.state.showLoadingDialog ? 'block': 'none'}} />
+                <Navbar title="CONFIN"></Navbar>
 
-                            <AlertDialogInformation 
-                                open={this.state.showInfoDialog} 
-                                close={this.fecharAlertaAviso} 
-                                mensagemCustomizada={this.state.mensagemAlerta} 
-                            />             
+                <ConsultaLancamentosForm meses={meses} tipos={tipos} buscar={this.aoBuscarForm} cadastrar={this.aoCadastrarForm}/>               
 
-                            <AlertLoading open={this.state.showLoadingDialog} />
-                        </div>
-                    </div>
-                    <Footer/>
-                </div>
-            </div> 
+                <LancamentosTable 
+                    lancamentos={this.state.lancamentos} 
+                    alterarStatus={this.aoAlterarStatus}
+                    deletarAction={this.abrirConfirmacao}
+                    editarAction={this.editar}
+                />    
+
+                <Fab position="right-bottom" slot="fixed" color="blue">
+                    <Icon ios="f7:plus" aurora="f7:plus" md="f7:plus"></Icon>
+                    <Icon ios="f7:xmark" aurora="f7:xmark" md="f7:xmark"></Icon>
+                    <FabButtons position="top">
+                        <FabButton onClick={this.aoSair} label="Sair" color="red"> 
+                            <Icon ios="f7:nosign" aurora="f7:nosign" md="f7:nosign"></Icon>
+                        </FabButton>
+                        <FabButton onClick={this.goHome} label="Home" color="blue"> 
+                            <Icon ios="f7:house" aurora="f7:house" md="f7:house"></Icon>
+                        </FabButton>
+                    </FabButtons>
+                </Fab>
+                
+            </Page>
         )
     }
 }

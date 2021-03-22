@@ -39,18 +39,14 @@ Instead, it will copy all the configuration files and the transitive dependencie
 
 You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
 
-### Material ui - https://material-ui.com/pt/getting-started/installation/
+### Framework7 - https://framework7.io/react/
 
 ```
-yarn add @material-ui/core
+yarn add framework7
 
-yarn add fontsource-roboto
+yarn add framework7-icons
 
-yarn add @material-ui/icons
-
-add following import in App.js
-
-import 'fontsource-roboto';
+yarn add framework7-react
 ```
 
 ### `yarn add react-router-dom`
@@ -65,6 +61,14 @@ This package uses promises to make http requests
 ### `yarn add http-status`
 
 This package has some constants to treat http request errors
+
+
+### `env`
+```
+Create .env file in src folder with following content:
+
+REACT_APP_API_URL=http://localhost:8080 (or api address)
+```
 
 ## Learn More
 
