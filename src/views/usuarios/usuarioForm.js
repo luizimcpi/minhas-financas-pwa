@@ -67,7 +67,10 @@ export default function UsuarioForm({cadastrar, voltar}) {
           <Icon ios="f7:plus" aurora="f7:plus" md="f7:plus"></Icon>
           <Icon ios="f7:xmark" aurora="f7:xmark" md="f7:xmark"></Icon>
           <FabButtons position="left">
-            <FabButton onClick={submitCadastro}>
+            <FabButton onClick={(e) => {
+            e.preventDefault()
+            submitCadastro()
+            }}>
               <Icon ios="f7:checkmark" aurora="f7:checkmark" md="f7:checkmark"></Icon>
             </FabButton>
             <FabButton onClick={voltar}>

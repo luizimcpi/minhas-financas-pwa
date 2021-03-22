@@ -79,7 +79,11 @@ export default function ConsultaLancamentoForm({meses, tipos, buscar, cadastrar}
              >
               {optionsTipos}
             </ListInput>
-          <button onClick={search} className="col button button-raised">Buscar</button>
+          <button onClick={(e) => {
+            e.preventDefault()
+            search()
+            }} 
+            className="col button button-raised">Buscar</button>
           <br/>
           <button onClick={cadastrar} className="col button button-raised button-fill">Cadastrar</button>
         </List>

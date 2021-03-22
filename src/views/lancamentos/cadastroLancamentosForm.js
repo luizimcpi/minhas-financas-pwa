@@ -1,12 +1,11 @@
-import { React, useEffect, useState } from 'react';
-
 import {
   Card,
   CardContent,
-  LoginScreenTitle,
   List,
-  ListInput
+  ListInput,
+  LoginScreenTitle
 } from 'framework7-react'
+import { React, useEffect, useState } from 'react';
 
 const CadastroLancamentosForm = (props) => {
   
@@ -124,8 +123,15 @@ const CadastroLancamentosForm = (props) => {
             value={status}
             disabled
           />
-        <button style={{ display: !atualizando ? 'block': 'none'}} onClick={register} className="col button button-raised">Cadastrar</button>
-        <button style={{ display: atualizando ? 'block': 'none'}} onClick={refresh} className="col button button-raised">Atualizar</button>
+        <button style={{ display: !atualizando ? 'block': 'none'}} onClick={(e) => {
+            e.preventDefault()
+            register()
+            }} 
+            className="col button button-raised">Cadastrar</button>
+        <button style={{ display: atualizando ? 'block': 'none'}} onClick={(e) => {
+            e.preventDefault()
+            refresh()}} 
+            className="col button button-raised">Atualizar</button>
         <br/>
         <button onClick={props.cancelar} className="col button button-raised button-fill">Cancelar</button>
       </List>
