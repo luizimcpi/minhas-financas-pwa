@@ -1,12 +1,12 @@
 import {
+Button,
+Card,
 CardContent,
+Col,
+Icon,
 List,
 ListItem,
-Card,
-Row,
-Col,
-Button,
-Icon
+Row
 } from 'framework7-react'
 
 import React from 'react';
@@ -45,7 +45,14 @@ const LancamentosTable = (props) => {
     }
   }
 
-  const rows = props.lancamentos.map( lancamento => {
+  let totalReceitas = 0
+  let totalDespesas = 0
+  let rows = props.lancamentos.map( lancamento => {
+    if(lancamento.tipo === 'RECEITA'){
+      totalReceitas+=lancamento.valor
+    } else {
+      totalDespesas+=lancamento.valor
+    }
     return (
      
       <ListItem
@@ -85,6 +92,21 @@ const LancamentosTable = (props) => {
       </ListItem>
     )
   })
+
+  
+  rows.push(
+    
+      <ListItem
+        key="d685c410-0afb-4d86-a3b5-5802ea5ca2c2"
+        title="Saldo"
+        after="Mês Atual"
+        subtitle={currencyFormatter.format(totalReceitas - totalDespesas, {locale: 'pt-BR'})}
+        text="Total de receitas debitando total de despesas do mês."
+      >
+    </ListItem>
+    
+  )
+  
 
   return (
     <Card>

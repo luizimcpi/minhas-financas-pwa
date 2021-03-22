@@ -1,15 +1,20 @@
 import {
+Card,
 CardContent,
 List,
 ListInput,
-LoginScreenTitle,
-Card
+LoginScreenTitle
 } from 'framework7-react'
 import { React, useState } from 'react';
 
+import moment from 'moment'
+
 export default function ConsultaLancamentoForm({meses, tipos, buscar, cadastrar}) {
-  const [ano, setAno] = useState("")
-  const [mes, setMes] = useState("")
+  const anoAtual = moment().format('YYYY')
+  const mesAtual = moment().format('M')
+
+  const [ano, setAno] = useState(anoAtual)
+  const [mes, setMes] = useState(mesAtual)
   const [tipo, setTipo] = useState("")
   const [descricao, setDescricao] = useState("")
 
