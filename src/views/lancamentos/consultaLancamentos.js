@@ -81,6 +81,10 @@ class ConsultaLancamentos extends React.Component{
         this.props.history.push(`/cadastro-lancamentos/${id}`)
     }
 
+    aoDuplicarLancamentos = (mes) => {
+        f7.dialog.alert('Lançamentos copiados com sucesso para o mês: ' + mes, () => {})
+    }
+
     aoAlterarStatus = (lancamento, status) => {
         const usuarioLogado = this.context.usuarioAutenticado
         this.setState({showLoadingDialog: true})
@@ -169,7 +173,10 @@ class ConsultaLancamentos extends React.Component{
                 <Progressbar infinite color="blue" style={{ display: this.state.showLoadingDialog ? 'block': 'none'}} />
                 <Navbar title="CONFIN"></Navbar>
 
-                <ConsultaLancamentosForm meses={meses} tipos={tipos} buscar={this.aoBuscarForm} cadastrar={this.aoCadastrarForm}/>               
+                <ConsultaLancamentosForm meses={meses} tipos={tipos} 
+                buscar={this.aoBuscarForm} 
+                cadastrar={this.aoCadastrarForm}
+                duplicarLancamentos={this.aoDuplicarLancamentos}/>               
 
                 <LancamentosTable 
                     lancamentos={this.state.lancamentos} 
