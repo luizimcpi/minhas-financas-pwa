@@ -9,7 +9,7 @@ import { React, useState } from 'react';
 
 import moment from 'moment'
 
-export default function ConsultaLancamentoForm({meses, tipos, buscar, cadastrar}) {
+export default function ConsultaLancamentoForm({meses, tipos, buscar, cadastrar, duplicarLancamentos}) {
   const anoAtual = moment().format('YYYY')
   const mesAtual = moment().format('M')
 
@@ -79,6 +79,12 @@ export default function ConsultaLancamentoForm({meses, tipos, buscar, cadastrar}
              >
               {optionsTipos}
             </ListInput>
+          <button onClick={(e) => {
+            e.preventDefault()
+            duplicarLancamentos(mesAtual)
+            }} 
+            className="col button button-raised">Duplicar Lançamentos</button>
+          <br/>
           <button onClick={(e) => {
             e.preventDefault()
             search()

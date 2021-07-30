@@ -81,6 +81,30 @@ class ConsultaLancamentos extends React.Component{
         this.props.history.push(`/cadastro-lancamentos/${id}`)
     }
 
+    aoDuplicarLancamentos = (mes) => {
+
+        const usuarioLogado = this.context.usuarioAutenticado
+
+        console.log(usuarioLogado.accessToken)
+
+        this.setState({showLoadingDialog: true})
+
+        const preloader = f7.dialog.preloader('Carregando...', 'blue')
+
+        this.service
+        .duplicarLancamentos(mes, usuarioLogado)
+        .then( response => {
+            preloader.close()
+            this.setState({showLoadingDialog: false, showTableDialog: false})
+            f7.dialog.alert('Lançamentos do mês: ' + mes + 'copiados com sucesso para o próximo mês.', () => {})
+        }).catch( error => {
+            preloader.close()
+            this.setState({showLoadingDialog: false, showTableDialog: false})
+            f7.dialog.alert('Erro ao duplicar lançamentos. Tente novamente ou mais tarde.', () => {})
+        })
+
+    }
+
     aoAlterarStatus = (lancamento, status) => {
         const usuarioLogado = this.context.usuarioAutenticado
         this.setState({showLoadingDialog: true})
@@ -169,7 +193,10 @@ class ConsultaLancamentos extends React.Component{
                 <Progressbar infinite color="blue" style={{ display: this.state.showLoadingDialog ? 'block': 'none'}} />
                 <Navbar title="CONFIN"></Navbar>
 
-                <ConsultaLancamentosForm meses={meses} tipos={tipos} buscar={this.aoBuscarForm} cadastrar={this.aoCadastrarForm}/>               
+                <ConsultaLancamentosForm meses={meses} tipos={tipos} 
+                buscar={this.aoBuscarForm} 
+                cadastrar={this.aoCadastrarForm}
+                duplicarLancamentos={this.aoDuplicarLancamentos}/>               
 
                 <LancamentosTable 
                     lancamentos={this.state.lancamentos} 

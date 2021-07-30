@@ -75,6 +75,10 @@ export default class LancamentoService extends ApiService {
         return this.deleteWithAuthorization(`/${id}`, usuarioLogado)
     }
 
+    duplicarLancamentos(mesAtual, usuarioLogado){
+        return this.postWithAuthorizationWithoutBody(`/${mesAtual}`, usuarioLogado)
+    }
+
     validar(lancamento){
         const erros = []
 
