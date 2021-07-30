@@ -82,7 +82,27 @@ class ConsultaLancamentos extends React.Component{
     }
 
     aoDuplicarLancamentos = (mes) => {
-        f7.dialog.alert('Lançamentos copiados com sucesso para o mês: ' + mes, () => {})
+
+        const usuarioLogado = this.context.usuarioAutenticado
+
+        console.log(usuarioLogado.accessToken)
+
+        this.setState({showLoadingDialog: true})
+
+        const preloader = f7.dialog.preloader('Carregando...', 'blue')
+
+        this.service
+        .duplicarLancamentos(mes, usuarioLogado)
+        .then( response => {
+            preloader.close()
+            this.setState({showLoadingDialog: false, showTableDialog: false})
+            f7.dialog.alert('Lançamentos copiados com sucesso para o mês: ' + mes, () => {})
+        }).catch( error => {
+            preloader.close()
+            this.setState({showLoadingDialog: false, showTableDialog: false})
+            f7.dialog.alert('Erro ao duplicar lançamentos. Tente novamente ou mais tarde.', () => {})
+        })
+
     }
 
     aoAlterarStatus = (lancamento, status) => {

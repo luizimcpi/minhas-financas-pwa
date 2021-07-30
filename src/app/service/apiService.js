@@ -52,6 +52,16 @@ class ApiService {
         });
     }
 
+    postWithAuthorizationWithoutBody(url, usuarioLogado){
+        const requestUrl = `${this.apiurl}${url}`
+        return httpClient.post(requestUrl, {}, {
+            headers: {
+                'Authorization': `Bearer ${usuarioLogado.accessToken}`,
+                'usuarioId': usuarioLogado.id
+            }
+        });
+    }
+
     putWithAuthorization(url, objeto, usuarioLogado){
         const requestUrl = `${this.apiurl}${url}`
         return httpClient.put(requestUrl, objeto, {
