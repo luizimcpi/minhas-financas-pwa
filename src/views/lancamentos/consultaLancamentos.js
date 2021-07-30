@@ -96,7 +96,7 @@ class ConsultaLancamentos extends React.Component{
         .then( response => {
             preloader.close()
             this.setState({showLoadingDialog: false, showTableDialog: false})
-            f7.dialog.alert('Lançamentos copiados com sucesso para o mês: ' + mes, () => {})
+            f7.dialog.alert('Lançamentos do mês: ' + mes + 'copiados com sucesso para o próximo mês.', () => {})
         }).catch( error => {
             preloader.close()
             this.setState({showLoadingDialog: false, showTableDialog: false})
