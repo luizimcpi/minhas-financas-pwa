@@ -34,7 +34,7 @@ class Login extends React.Component {
         const preloader = f7.dialog.preloader('Carregando...', 'blue')
 
         this.service.autenticar({
-            email: dados.email,
+            email: dados.email.trim(),
             senha: dados.senha
         }).then( response => {
             preloader.close()
