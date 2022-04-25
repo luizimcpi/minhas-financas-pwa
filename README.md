@@ -68,6 +68,17 @@ This package has some constants to treat http request errors
 Create .env file in src folder with following content:
 
 REACT_APP_API_URL=http://localhost:8080 (or api address)
+
+OR 
+Linux (AWS)
+
+vi ~/.bash_profile
+
+export REACT_APP_API_URL=http://localhost:8080
+
+esc :x
+
+source ~/.bash_profile
 ```
 
 ## Learn More
