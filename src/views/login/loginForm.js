@@ -48,7 +48,7 @@ export default function LoginForm({entrar, usuarios}) {
         </List>
         <List>
           <BlockFooter>
-           Todos os direitos reservados. 2021
+           Todos os direitos reservados. 2022
           </BlockFooter>
         </List>
       </Page>

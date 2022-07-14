@@ -26,7 +26,7 @@ export default function HomeCard({data, consultar, deslogar}) {
 
   return (
     <Page>
-        <Navbar title="CONFIN">
+        <Navbar title="FINANÇAS">
         </Navbar>
         <Card
             title="Saldo"

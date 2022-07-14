@@ -191,7 +191,7 @@ class ConsultaLancamentos extends React.Component{
         return (
             <Page>
                 <Progressbar infinite color="blue" style={{ display: this.state.showLoadingDialog ? 'block': 'none'}} />
-                <Navbar title="CONFIN"></Navbar>
+                <Navbar title="FINANÇAS"></Navbar>
 
                 <ConsultaLancamentosForm meses={meses} tipos={tipos} 
                 buscar={this.aoBuscarForm} 

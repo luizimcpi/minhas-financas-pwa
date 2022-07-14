@@ -24,10 +24,11 @@ class UsuarioService extends ApiService {
         if(!usuario.nome){
             erros.push('O campo nome é obrigatório.')
         }
-        const emailPattern = /^\w+@[a-zA-Z_]+?\.[a-zA-Z]{2,3}$/; 
+        const emailPattern =  /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/; 
         if(!usuario.email){
             erros.push('O campo email é obrigatório.')
-        }else if(!usuario.email.match(emailPattern)){
+        }
+        else if(!usuario.email.match(emailPattern)){
             erros.push('Informe um email válido.')
         }
 

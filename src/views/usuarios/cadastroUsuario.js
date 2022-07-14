@@ -39,7 +39,7 @@ class CadastroUsuario extends React.Component {
         .then(response => {
             preloader.close()
             this.setState({showLoadingDialog: false})
-            f7.dialog.alert('Usuário cadastrado com sucesso!', () => {})
+            f7.dialog.alert('Usuário cadastrado com sucesso, ative através do link enviado para seu e-mail!', () => {})
             this.props.history.push('/home')
         }).catch(error => {
             preloader.close()
