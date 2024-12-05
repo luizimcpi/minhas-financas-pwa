@@ -81,7 +81,7 @@ export default function UsuarioForm({cadastrar, voltar}) {
        
         <List>
           <BlockFooter>
-           Todos os direitos reservados. 2022
+           Todos os direitos reservados. 2024
           </BlockFooter>
         </List>
 
