@@ -35,4 +35,4 @@ jobs:
             cd /frontapp
             rm -rf /node_modules
             yarn
-            yarn start
+            yarn start &
