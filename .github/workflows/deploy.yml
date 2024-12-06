@@ -34,5 +34,6 @@ jobs:
             npm --help
             cd /frontapp
             rm -rf /node_modules
+            kill $(lsof -t -i:3000)
             yarn
             yarn start &
