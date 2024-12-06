@@ -1,39 +1,39 @@
-name: Deploy on VPS
+# name: Deploy on VPS
 
-on:
-  push:
-    branches: [master]
+# on:
+#   push:
+#     branches: [master]
 
-jobs:
-  build_deploy:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
+# jobs:
+#   build_deploy:
+#     runs-on: ubuntu-latest
+#     steps:
+#       - name: Checkout code
+#         uses: actions/checkout@v4
 
-      - name: copy files via ssh password
-        uses: appleboy/scp-action@v0.1.7
-        with:
-          host: ${{ secrets.HOST }}
-          username: ${{ secrets.USERNAME }}
-          password: ${{ secrets.PASSWORD }}
-          port: ${{ secrets.PORT }}
-          source: "."
-          target: "/frontapp"
+#       - name: copy files via ssh password
+#         uses: appleboy/scp-action@v0.1.7
+#         with:
+#           host: ${{ secrets.HOST }}
+#           username: ${{ secrets.USERNAME }}
+#           password: ${{ secrets.PASSWORD }}
+#           port: ${{ secrets.PORT }}
+#           source: "."
+#           target: "/frontapp"
       
-      - name: install dependencies and deploy using ssh
-        uses: appleboy/ssh-action@v1.2.0
-        with:
-          host: ${{ secrets.HOST }}
-          username: ${{ secrets.USERNAME }}
-          password: ${{ secrets.PASSWORD }}
-          port: ${{ secrets.PORT }}
-          script: |
-            export NVM_DIR=~/.nvm
-            source ~/.nvm/nvm.sh
-            npm --help
-            cd /frontapp
-            rm -rf /node_modules
-            kill $(lsof -t -i:3000)
-            yarn
-            yarn start &
+#       - name: install dependencies and deploy using ssh
+#         uses: appleboy/ssh-action@v1.2.0
+#         with:
+#           host: ${{ secrets.HOST }}
+#           username: ${{ secrets.USERNAME }}
+#           password: ${{ secrets.PASSWORD }}
+#           port: ${{ secrets.PORT }}
+#           script: |
+#             export NVM_DIR=~/.nvm
+#             source ~/.nvm/nvm.sh
+#             npm --help
+#             cd /frontapp
+#             rm -rf /node_modules
+#             kill $(lsof -t -i:3000)
+#             yarn
+#             yarn start &

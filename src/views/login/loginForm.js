@@ -44,11 +44,11 @@ export default function LoginForm({entrar, usuarios}) {
             }} 
             className="col button button-raised">Entrar</button>
           <br/>
-          <button onClick={usuarios} className="col button button-raised button-fill">Cadastrar</button>
+          {/* <button onClick={usuarios} className="col button button-raised button-fill">Cadastrar</button> */}
         </List>
         <List>
           <BlockFooter>
-           Todos os direitos reservados. 2022
+           Todos os direitos reservados. 2024
           </BlockFooter>
         </List>
       </Page>
