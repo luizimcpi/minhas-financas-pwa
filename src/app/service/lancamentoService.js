@@ -38,7 +38,7 @@ export default class LancamentoService extends ApiService {
     }
 
     salvar(lancamento, usuarioLogado){
-        return this.postWithAuthorization('/', lancamento, usuarioLogado)
+        return this.postWithAuthorization('', lancamento, usuarioLogado)
     }
 
     atualizar(lancamento, usuarioLogado){
