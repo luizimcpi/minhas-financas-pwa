@@ -1,6 +1,5 @@
 import AuthService from './app/service/authService'
 import React from 'react'
-import jwt from 'jsonwebtoken'
 
 export const AuthContext = React.createContext()
 export const AuthConsumer = AuthContext.Consumer;
