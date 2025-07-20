@@ -109,7 +109,7 @@ const LancamentosTable = (props) => {
   
 
   return (
-    <Card>
+    <Card style={{border: '1px solid #27ae60', background: '#eafaf1'}}>
       <CardContent>
         <List mediaList>
           {rows}

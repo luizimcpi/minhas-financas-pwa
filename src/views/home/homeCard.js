@@ -5,7 +5,9 @@ import {
   FabButtons,
   Icon,
   Navbar,
-  Page
+  Page,
+  Block,
+  Button
 } from 'framework7-react'
 
 import {React, useState} from 'react'
@@ -26,29 +28,28 @@ export default function HomeCard({data, consultar, deslogar}) {
 
   return (
     <Page>
-        <Navbar title="FINANÇAS">
-        </Navbar>
-        <Card
-            title="Saldo"
-            content={showBalance ? saldoAtualFormatado: saldoOculto}
-            footer={nomeUsuario}
-            ></Card>
-        <Fab position="right-bottom" slot="fixed" color="blue">
+        <Navbar title="FINANÇAS" left={<Button iconF7="menu" color="green" panelOpen="left" />}></Navbar>
+        <Block strong style={{textAlign: 'center'}}>
+          <Card
+              title="Saldo"
+              content={showBalance ? saldoAtualFormatado: saldoOculto}
+              footer={nomeUsuario}
+              style={{background: '#eafaf1', border: '1px solid #27ae60'}}
+          ></Card>
+        </Block>
+        <Fab position="right-bottom" slot="fixed" color="green">
             <Icon ios="f7:plus" aurora="f7:plus" md="f7:plus"></Icon>
             <Icon ios="f7:xmark" aurora="f7:xmark" md="f7:xmark"></Icon>
             <FabButtons position="top">
                 <FabButton onClick={deslogar} label="Sair" color="red"> 
                     <Icon ios="f7:nosign" aurora="f7:nosign" md="f7:nosign"></Icon>
                 </FabButton>
-
-                <FabButton onClick={consultar} label="Lançamentos">
+                <FabButton onClick={consultar} label="Lançamentos" color="green">
                     <Icon ios="f7:money_dollar" aurora="f7:money_dollar" md="f7:money_dollar"></Icon>
                 </FabButton>
-               
-                <FabButton onClick={changeShowBalance} label="Ver / Ocultar Saldo" color="red"> 
+                <FabButton onClick={changeShowBalance} label={showBalance ? "Ocultar Saldo" : "Ver Saldo"} color="green"> 
                     <Icon ios="f7:eye" aurora="f7:eye" md="f7:eye"></Icon>
                 </FabButton>
-
             </FabButtons>
         </Fab>
     </Page>

@@ -3,7 +3,9 @@ Card,
 CardContent,
 List,
 ListInput,
-LoginScreenTitle
+LoginScreenTitle,
+Button,
+Icon
 } from 'framework7-react'
 import { React, useState } from 'react';
 
@@ -31,8 +33,7 @@ export default function ConsultaLancamentoForm({meses, tipos, buscar, cadastrar,
   );
 
   return (
-
-    <Card>
+    <Card style={{border: '1px solid #27ae60', background: '#eafaf1'}}>
       <CardContent>
         <LoginScreenTitle>Consulta - Lançamentos</LoginScreenTitle>
         <List form>
@@ -44,6 +45,8 @@ export default function ConsultaLancamentoForm({meses, tipos, buscar, cadastrar,
               onInput={(e) => {
                 setAno(e.target.value);
               }}
+              clearButton
+              media={<Icon f7="calendar_today" color="green" />}
             />
             <ListInput
               label="Mes"
@@ -54,7 +57,9 @@ export default function ConsultaLancamentoForm({meses, tipos, buscar, cadastrar,
                   event => {
                       setMes(event.target.value);
                   }
-              }>
+              }
+              media={<Icon f7="calendar" color="green" />}
+            >
               {optionsMeses}
             </ListInput>
             <ListInput
@@ -65,6 +70,8 @@ export default function ConsultaLancamentoForm({meses, tipos, buscar, cadastrar,
               onInput={(e) => {
                 setDescricao(e.target.value);
               }}
+              clearButton
+              media={<Icon f7="doc_text" color="green" />}
             />
             <ListInput
               label="Tipo"
@@ -76,22 +83,13 @@ export default function ConsultaLancamentoForm({meses, tipos, buscar, cadastrar,
                           setTipo(event.target.value);
                       }
                   }
+              media={<Icon f7="layers" color="green" />}
              >
               {optionsTipos}
             </ListInput>
-          <button onClick={(e) => {
-            e.preventDefault()
-            duplicarLancamentos(mesAtual)
-            }} 
-            className="col button button-raised">Duplicar Lançamentos</button>
-          <br/>
-          <button onClick={(e) => {
-            e.preventDefault()
-            search()
-            }} 
-            className="col button button-raised">Buscar</button>
-          <br/>
-          <button onClick={cadastrar} className="col button button-raised button-fill">Cadastrar</button>
+          <Button fill color="green" onClick={() => duplicarLancamentos(mesAtual)} style={{marginTop: 8}}>Duplicar Lançamentos</Button>
+          <Button fill color="green" onClick={search} style={{marginTop: 8}}>Buscar</Button>
+          <Button outline color="green" onClick={cadastrar} style={{marginTop: 8}}>Cadastrar</Button>
         </List>
       </CardContent>
     </Card>

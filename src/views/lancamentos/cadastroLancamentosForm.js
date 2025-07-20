@@ -3,7 +3,9 @@ import {
   CardContent,
   List,
   ListInput,
-  LoginScreenTitle
+  LoginScreenTitle,
+  Button,
+  Icon
 } from 'framework7-react'
 import { React, useEffect, useState } from 'react';
 
@@ -55,8 +57,7 @@ const CadastroLancamentosForm = (props) => {
   }
 
   return (
-
-    <Card>
+    <Card style={{border: '1px solid #27ae60', background: '#eafaf1'}}>
     <CardContent>
       <LoginScreenTitle>{atualizando ? 'Atualização de Lançamento' : 'Cadastro de Lançamentos'}</LoginScreenTitle>
       <List form>
@@ -68,6 +69,8 @@ const CadastroLancamentosForm = (props) => {
             onInput={(e) => {
               setDescricao(e.target.value);
             }}
+            clearButton
+            media={<Icon f7="doc_text" color="green" />}
           />
           <ListInput
             label="Valor"
@@ -77,8 +80,9 @@ const CadastroLancamentosForm = (props) => {
             onInput={(e) => {
               setValor(e.target.value.replace(',', '.'));
             }}
+            clearButton
+            media={<Icon f7="money_dollar" color="green" />}
           />
-
           <ListInput
             label="Mes"
             type="select"  
@@ -88,10 +92,11 @@ const CadastroLancamentosForm = (props) => {
                 event => {
                     setMes(event.target.value);
                 }
-            }>
+            }
+            media={<Icon f7="calendar" color="green" />}
+          >
             {optionsMeses}
           </ListInput>
-
           <ListInput
             label="Ano"
             type="text"
@@ -100,8 +105,9 @@ const CadastroLancamentosForm = (props) => {
             onInput={(e) => {
               setAno(e.target.value);
             }}
+            clearButton
+            media={<Icon f7="calendar_today" color="green" />}
           />
-       
           <ListInput
             label="Tipo"
             type="select"
@@ -112,28 +118,21 @@ const CadastroLancamentosForm = (props) => {
                         setTipo(event.target.value);
                     }
                 }
+            media={<Icon f7="layers" color="green" />}
            >
             {optionsTipos}
           </ListInput>
-
           <ListInput
             label="Status"
             type="text"
             placeholder="Status"
             value={status}
             disabled
+            media={<Icon f7="info_circle" color="green" />}
           />
-        <button style={{ display: !atualizando ? 'block': 'none'}} onClick={(e) => {
-            e.preventDefault()
-            register()
-            }} 
-            className="col button button-raised">Cadastrar</button>
-        <button style={{ display: atualizando ? 'block': 'none'}} onClick={(e) => {
-            e.preventDefault()
-            refresh()}} 
-            className="col button button-raised">Atualizar</button>
-        <br/>
-        <button onClick={props.cancelar} className="col button button-raised button-fill">Cancelar</button>
+        <Button fill color="green" style={{ display: !atualizando ? 'block': 'none', marginTop: 16}} onClick={register}>Cadastrar</Button>
+        <Button fill color="green" style={{ display: atualizando ? 'block': 'none', marginTop: 16}} onClick={refresh}>Atualizar</Button>
+        <Button outline color="green" style={{marginTop: 8}} onClick={props.cancelar}>Cancelar</Button>
       </List>
     </CardContent>
   </Card>

@@ -6,8 +6,10 @@ import {
   Icon,
   List,
   ListInput,
+  LoginScreen,
   LoginScreenTitle,
-  Page
+  Page,
+  Button
 } from 'framework7-react';
 import { React, useState } from 'react';
 
@@ -21,7 +23,8 @@ export default function UsuarioForm({cadastrar, voltar}) {
   }
 
   return (
-    <Page noToolbar noNavbar noSwipeback loginScreen>
+    <LoginScreen>
+      <Page loginScreen>
         <LoginScreenTitle>Cadastro de Usuários</LoginScreenTitle>
         <List form>
             <ListInput
@@ -32,6 +35,8 @@ export default function UsuarioForm({cadastrar, voltar}) {
               onInput={(e) => {
                 setNome(e.target.value);
               }}
+              clearButton
+              media={<Icon f7="person" color="green" />}
             />
             <ListInput
               label="E-mail"
@@ -41,6 +46,8 @@ export default function UsuarioForm({cadastrar, voltar}) {
               onInput={(e) => {
                 setEmail(e.target.value);
               }}
+              clearButton
+              media={<Icon f7="envelope" color="green" />}
             />
             <ListInput
               label="Senha"
@@ -50,6 +57,8 @@ export default function UsuarioForm({cadastrar, voltar}) {
               onInput={(e) => {
                 setSenha(e.target.value);
               }}
+              clearButton
+              media={<Icon f7="lock" color="green" />}
             />
             <ListInput
               label="Confirmação de Senha"
@@ -59,33 +68,18 @@ export default function UsuarioForm({cadastrar, voltar}) {
               onInput={(e) => {
                 setSenhaRepeticao(e.target.value);
               }}
+              clearButton
+              media={<Icon f7="lock_fill" color="green" />}
             />
-         
         </List>
-
-        <Fab position="right-bottom" slot="fixed" color="pink">
-          <Icon ios="f7:plus" aurora="f7:plus" md="f7:plus"></Icon>
-          <Icon ios="f7:xmark" aurora="f7:xmark" md="f7:xmark"></Icon>
-          <FabButtons position="left">
-            <FabButton onClick={(e) => {
-            e.preventDefault()
-            submitCadastro()
-            }}>
-              <Icon ios="f7:checkmark" aurora="f7:checkmark" md="f7:checkmark"></Icon>
-            </FabButton>
-            <FabButton onClick={voltar}>
-              <Icon ios="f7:arrow_uturn_left" aurora="f7:arrow_uturn_left" md="f7:arrow_uturn_left"></Icon>
-            </FabButton>
-          </FabButtons>
-        </Fab>
-       
+        <Button fill large color="green" onClick={submitCadastro} style={{marginTop: 16}}>Cadastrar</Button>
+        <Button outline color="green" onClick={voltar} style={{marginTop: 8}}>Voltar</Button>
         <List>
           <BlockFooter>
            Todos os direitos reservados. 2024
           </BlockFooter>
         </List>
-
       </Page>
-      
+    </LoginScreen>
   );
 }

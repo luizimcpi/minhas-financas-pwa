@@ -190,8 +190,8 @@ class ConsultaLancamentos extends React.Component{
 
         return (
             <Page>
-                <Progressbar infinite color="blue" style={{ display: this.state.showLoadingDialog ? 'block': 'none'}} />
-                <Navbar title="FINANÇAS"></Navbar>
+                <Progressbar infinite color="green" style={{ display: this.state.showLoadingDialog ? 'block': 'none'}} />
+                <Navbar title="FINANÇAS" left={<Icon f7="menu" color="green" panelOpen="left" />} />
 
                 <ConsultaLancamentosForm meses={meses} tipos={tipos} 
                 buscar={this.aoBuscarForm} 
@@ -205,14 +205,14 @@ class ConsultaLancamentos extends React.Component{
                     editarAction={this.editar}
                 />    
 
-                <Fab position="right-bottom" slot="fixed" color="blue">
+                <Fab position="right-bottom" slot="fixed" color="green">
                     <Icon ios="f7:plus" aurora="f7:plus" md="f7:plus"></Icon>
                     <Icon ios="f7:xmark" aurora="f7:xmark" md="f7:xmark"></Icon>
                     <FabButtons position="top">
                         <FabButton onClick={this.aoSair} label="Sair" color="red"> 
                             <Icon ios="f7:nosign" aurora="f7:nosign" md="f7:nosign"></Icon>
                         </FabButton>
-                        <FabButton onClick={this.goHome} label="Home" color="blue"> 
+                        <FabButton onClick={this.goHome} label="Home" color="green"> 
                             <Icon ios="f7:house" aurora="f7:house" md="f7:house"></Icon>
                         </FabButton>
                     </FabButtons>
